@@ -1,0 +1,169 @@
+/*importa a fonte monstserrat*/
+@import url('https://fonts.googleapis.com/css2?family=Montserrat+Alternates:wght@400;700&display=swap');
+/*importa a fonte irish grober*/
+@import url('https://fonts.googleapis.com/css2?family=Irish+Grover&display=swap');
+
+
+/*Os valores de tamanhos estão exatamente iguais aos do figma, e em px */
+/* mudar para porcentagem */
+
+body {
+    font-family: 'Montserrat Alternates', sans-serif;
+    font-style: normal;
+    margin: 0;
+    padding: 0;
+    min-height: 1000px;
+}
+
+html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+}
+
+a {
+    color: #FFFFFF; /* Replace #000 with your desired color */
+}
+
+
+/* Container da tela toda, para organizar as seções com o flexbox*/
+.container{
+    display: flex;
+    flex-direction: column;
+    background-color: #FFFFFF;
+    height: 100%;
+}
+
+
+.login-container{
+    display: flex;
+    flex-direction: row;
+    background-color: #F2EBEC;
+    border-radius: 15px;
+    border-color: black;
+    border: 2px solid black;
+    margin: 30px;
+    padding: 30px;
+    color: #1c1c1c;
+    margin: auto;
+    margin-top: 100px;
+    width: 70%;    
+    max-width: 80%;
+    min-width: 400px;
+    height: 500px;
+    z-index: 2;
+}
+
+
+/*header*/
+.header{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+    background-color: #A68F8F;
+    height: 2%;
+    color: #FFFFFF;
+
+}
+
+/*logo e nome da marca*/
+.brand{
+    display: flex;
+    flex-direction: row;
+    align-self: center;
+    justify-content: space-evenly;
+    align-items: center;
+    font-size: 13px;
+    width: 18%;
+    font-family: 'Irish Grover', cursive;
+  
+    
+}
+
+#dogpaw{
+    position: absolute;
+    height: 28%;
+    width: 14%;
+    z-index: 1;
+}
+
+
+.welcome{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.registration{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: #734D54;
+    width: 50%;
+    padding-top: 7%;
+    padding-bottom: 0%;
+}
+
+.registration p{
+    margin-left: 15px;
+}
+
+.email-field{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    color: #9B9595;
+    background-color: #F2D5D8;
+    width: 90%;
+    height: 19%;
+    border-radius: 27px;
+    margin: 12px;
+    font-size: 25px;
+}
+
+.password-field{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    color: #9B9595;
+    background-color: #F2D5D8;
+    width: 90%;
+    height: 19%;
+    border-radius: 27px;
+    margin: 8px;
+    font-size: 25px;
+}
+
+.continuar-button{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: #F2D5D8;
+    width: 40%;
+    height: 10%;
+    border-radius: 20px;
+    margin: 8px;
+}
+
+.continuar-button p{
+    margin-left: 0px;
+}
+
+.fazer-cadastro-button{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #F2D5D8;
+    width: 40%;
+    height: 10%;
+    border-radius: 20px;
+    margin: 8px;
+}
+
+.fazer-cadastro-button p{
+    margin-left: 0px;
+}
