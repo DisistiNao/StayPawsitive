@@ -1,0 +1,16 @@
+/*importa a fonte monstserrat*/
+@import url('https://fonts.googleapis.com/css2?family=Montserrat+Alternates:wght@400;700&display=swap');
+/*importa a fonte irish grober*/
+@import url('https://fonts.googleapis.com/css2?family=Irish+Grover&display=swap');
+
+/*header*/
+.header{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+    background-color: #A68F8F;
+    height: 2%;
+    color: #FFFFFF;
+    z-index: 5;
+}

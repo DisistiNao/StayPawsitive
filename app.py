@@ -1,15 +1,9 @@
-from flask import Flask, render_template, request
-
-app = Flask(__name__, static_url_path='/static')
-
-@app.route('/')
-def index():
-    return render_template('index.html')
-
-@app.route('/cadastro/', methods=["GET", "POST"])
-def login():
-    return render_template('cadastro.html')
+import sqlalchemy as sa
+import sqlalchemy.orm as so
+from app import app, db
+from app.models import User, Post
 
 
-if __name__ == '__main__':
-    app.run(debug=True)
+@app.shell_context_processor
+def make_shell_context():
+    return {'sa': sa, 'so': so, 'db': db, 'User': User, 'Post': Post}
