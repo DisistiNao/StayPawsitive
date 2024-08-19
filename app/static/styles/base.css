@@ -3,14 +3,59 @@
 /*importa a fonte irish grober*/
 @import url('https://fonts.googleapis.com/css2?family=Irish+Grover&display=swap');
 
-/*header*/
-.header{
+:root {
+    font-size: 62.5%;
+}
+
+body {
+    font-family: 'Montserrat Alternates', sans-serif;
+    font-style: normal;
+    margin: 0;
+    padding: 0;
+}
+
+.header {
+    background: #A68F8F;
     display: flex;
     flex-direction: row;
     justify-content: space-evenly;
     align-items: center;
-    background-color: #A68F8F;
-    height: 2%;
-    color: #FFFFFF;
-    z-index: 5;
+    padding: 1rem 0rem;
+}
+
+.header > p {
+    color: white;
+    font-size: 2.4rem;
+}
+
+.right {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: flex-end;
+}
+
+.right > div {
+    padding: 0rem 8rem;
+}
+
+.right > div > a {
+    padding: 0rem .8rem;
+}
+
+.right > div > a:link, .right > div > a:visited {
+    text-decoration: none;
+    color: white;
+    font-size: 2.4rem;
+}
+
+.right > div > a:hover {
+    text-decoration: none;
+    color: #F2D5D8;
+    font-size: 2.4rem;
+}
+
+.right > img {
+    width: 4rem;
+    height: 4rem;
 }

@@ -1,32 +1,28 @@
 <!doctype html>
 <html>
     <head>
-        {% if title %}
-        <title>{{ title }} - Microblog</title>
-        {% else %}
-        <title>Welcome to Microblog</title>
-        {% endif %}
+        <title>Stay Pawsitive - {{ title }}</title>
+        <link rel="stylesheet" href="{{ url_for('static', filename='styles/base.css') }}">
     </head>
     <body>
-        <div>
-            Microblog:
-            <a href="{{ url_for('index') }}">Home</a>
-            {% if current_user.is_anonymous %}
-            <a href="{{ url_for('login') }}">Login</a>
-            {% else %}
-            <a href="{{ url_for('logout') }}">Logout</a>
-            {% endif %}
-        </div>
-        <hr>
-        {% with messages = get_flashed_messages() %}
-        {% if messages %}
-        <ul>
-            {% for message in messages %}
-            <li>{{ message }}</li>
-            {% endfor %}
-        </ul>
-        {% endif %}
-        {% endwith %}
-        {% block content %}{% endblock %}
+        <div class="header">
+            <div class="brand">
+                <a href="{{ url_for('index') }}" style="text-decoration: none;"><img src="{{ url_for('static', filename='images/Logo.png') }}" alt="logo"></a>
+            </div>
+
+            <p>Como funciona</p>
+
+            <div class="right">
+                <div>
+                    <a href="{{ url_for('index') }}">Home</a>
+                    {% if current_user.is_anonymous %}
+                    <a href="{{ url_for('login') }}">Login</a>
+                    {% else %}
+                    <a href="{{ url_for('logout') }}">Logout</a>
+                    {% endif %}
+                </div>
+                <img src="{{ url_for('static', filename='images/Instagram.png') }}" alt="instagram-logo">
+            </div>
+        </div> 
     </body>
 </html>
