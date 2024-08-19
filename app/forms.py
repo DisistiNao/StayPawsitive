@@ -24,9 +24,9 @@ class RegistrationForm(FlaskForm):
     phone = StringField(
         'Phone', validators=[DataRequired(),Length(min=8, message="Minimun 8 digits.")])
     birth_date = DateField('Birth Date', format='%d-%m-%Y', default=datetime.now().strftime("%Y-%m-%d"),
-                           validators=DataRequired())
-    address = StringField('Address', validators=DataRequired())
-    cpf = StringField('CPF', validators=[DataRequired(), Regexp('([0-9]{2}[\.]?[0-9]{3}[\.]?[0-9]{3}[\/]?[0-9]{4}[-]?[0-9]{2})|([0-9]{3}[\.]?[0-9]{3}[\.]?[0-9]{3}[-]?[0-9]{2})')])
+                           validators=[DataRequired()])
+    address = StringField('Address', validators=[DataRequired()])
+    cpf = StringField('CPF', validators=[DataRequired(), Regexp(r'([0-9]{2}[\.]?[0-9]{3}[\.]?[0-9]{3}[\/]?[0-9]{4}[-]?[0-9]{2})|([0-9]{3}[\.]?[0-9]{3}[\.]?[0-9]{3}[-]?[0-9]{2})')])
 
 
     def validate_cpf(self, cpf):
