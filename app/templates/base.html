@@ -3,6 +3,7 @@
     <head>
         <title>Stay Pawsitive - {{ title }}</title>
         <link rel="stylesheet" href="{{ url_for('static', filename='styles/base.css') }}">
+        <!-- <link rel="stylesheet" href="{{ url_for('static', filename='styles/{{title}}.css') }}"> -->
     </head>
     <body>
         <div class="header">
@@ -15,13 +16,15 @@
             <div class="right">
                 <div>
                     <a href="{{ url_for('index') }}">Home</a>
-                    {% if current_user.is_anonymous %}
+                    <!-- {% if current_user.is_anonymous %} -->
                     <a href="{{ url_for('login') }}">Login</a>
-                    {% else %}
+                    <!-- {% else %} -->
                     <a href="{{ url_for('logout') }}">Logout</a>
-                    {% endif %}
+                    <!-- {% endif %} -->
                 </div>
-                <img src="{{ url_for('static', filename='images/Instagram.png') }}" alt="instagram-logo">
+                <a href="https://www.instagram.com/staypawsitive99/">
+                    <img src="{{ url_for('static', filename='images/Instagram.png') }}" alt="instagram-logo">
+                </a>
             </div>
         </div> 
     </body>

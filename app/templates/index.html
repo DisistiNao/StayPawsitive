@@ -1,8 +1,72 @@
-{% extends "base.html" %}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Stay Pawsitive - {{ title }}</title>
+        <link rel="stylesheet" href="{{ url_for('static', filename='styles/base.css') }}">
+        <link rel="stylesheet" href="{{ url_for('static', filename='styles/index.css') }}">
+    </head>
+    <body>
+        <div class="header">
+            <div class="brand">
+                <a href="{{ url_for('index') }}" style="text-decoration: none;"><img src="{{ url_for('static', filename='images/Logo.png') }}" alt="logo"></a>
+            </div>
 
-{% block content %}
-    <h1>Hi, {{ current_user.username }}!</h1>
-    {% for post in posts %}
-    <div><p>{{ post.author.username }} says: <b>{{ post.body }}</b></p></div>
-    {% endfor %}
-{% endblock %}
+            <p>Como funciona</p>
+
+            <div class="right">
+                <div>
+                    <a href="{{ url_for('index') }}">Home</a>
+                    <!-- {% if current_user.is_anonymous %} -->
+                    <a href="{{ url_for('login') }}">Login</a>
+                    <!-- {% else %} -->
+                    <a href="{{ url_for('logout') }}">Logout</a>
+                    <!-- {% endif %} -->
+                </div>
+                <a href="https://www.instagram.com/staypawsitive99/">
+                    <img src="{{ url_for('static', filename='images/Instagram.png') }}" alt="instagram-logo">
+                </a>
+            </div>
+        </div>
+
+        <div class="ilustration">
+            <h1>Fique Pawsitivo: Com um gesto, faça uma patinha feliz.</h1>
+            <img src = "{{ url_for('static', filename='images/side-view-owner-walking-with-dog.jpg') }}"/>
+        </div>
+
+        <div class="info">
+            <h1>Precisando de ajuda?</h1>
+            <div class="info-services">
+                <div class="hospedagem">
+                    <img src="{{ url_for('static', filename='images/hospedandoCachorro.png') }}" alt="hospedando cachorro">
+                    <h2>Hospede seu pet!</h2>
+                </div>
+                <div class="passeio">
+                    <img src="{{ url_for('static', filename='images/passeioCachorro.png') }}" alt="passeio cachorro">
+                    <h2>E que tal um passeio?</h2>
+                </div>
+            </div>
+        </div>
+
+        <div class="sobre">
+            <div class="sobre-conteudo">
+                <h1>Porque nos importamos com o bem estar animal</h1>
+                <div class="container-conteudo">
+                    
+                    <div class="conteudo1">
+                        <img src="{{ url_for('static', filename='images/dogSpa.png') }}" alt="">
+                        <h2>"Promover o bem-estar animal é fortalecer laços de afeto e responsabilidade, garantindo que nossos companheiros de quatro patas recebam o cuidado e o carinho que merecem</h2>
+                    </div>
+                    <div class="conteudo2">
+                        <img src="{{ url_for('static', filename='images/dogSpa1.png') }}" alt="">
+                        <h2>O bem-estar é vital para a saúde do cão: reduz o estresse, fortalece o sistema imunológico e promove uma vida mais longa e feliz.</h2>
+                    </div>
+                    
+                </div>
+            </div>
+            <img src="{{ url_for('static', filename='images/dogPaw.png') }}" alt="dogpaw" style="width: 350px; height: 391px; position: absolute; left: 73%;">
+        </div>
+
+    </body>
+</html>
