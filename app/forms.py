@@ -15,6 +15,7 @@ class LoginForm(FlaskForm):
 
 class RegistrationForm(FlaskForm):
     username = StringField('Username', validators=[DataRequired()])
+    name = StringField('Name', validators=[DataRequired()])
     password = PasswordField('Password', validators=[DataRequired()])
     password2 = PasswordField(
         'Repeat Password', validators=[DataRequired(), EqualTo('password')])
@@ -25,9 +26,7 @@ class RegistrationForm(FlaskForm):
     birth_date = DateField(
         'Birth Date',
         format='%d-%m-%Y',
-        default=datetime.now(),
-        validators=[DataRequired()]
-    )
+        default=datetime.now())
     address = StringField('Address', validators=[DataRequired()])
     cpf = StringField('CPF', validators=[DataRequired(), Regexp(r'([0-9]{2}[\.]?[0-9]{3}[\.]?[0-9]{3}[\/]?[0-9]{4}[-]?[0-9]{2})|([0-9]{3}[\.]?[0-9]{3}[\.]?[0-9]{3}[-]?[0-9]{2})')])
 
@@ -39,21 +38,6 @@ class RegistrationForm(FlaskForm):
         if user is not None:
                 raise ValidationError('Cpf already registered.')
         
-        cpf_string = ''.join(filter(str.isdigit, cpf.data))
-
-        def check_digit(cpf, weight):
-            sum = sum(int(cpf[i]) * (weight - i) for i in range(weight - 1))
-            digit = (sum * 10) % 11
-            return digit if digit < 10 else 0
-        
-        digit1 = check_digit(cpf_string, 10)
-        
-        if digit1 != int(cpf[9]):
-            raise ValidationError('Invalid cpf.')
-        
-        digit2 = check_digit(cpf_string, 11)
-        if digit2 != int(cpf[10]):
-            raise ValidationError('Invalid cpf.')
         
 
     def validate_username(self, username):
