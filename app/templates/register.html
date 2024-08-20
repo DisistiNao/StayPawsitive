@@ -1,37 +1,147 @@
-{% extends "base.html" %}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>
+            Stay Pawsitive
+        </title>
+        <link rel="stylesheet" href="{{url_for('static', filename='styles/register.css')}}">
+        <link rel="shortcut icon" href="{{url_for('static', filename='images/Logo.ico')}}" type="paw-icon">
+    </head>
 
-{% block content %}
-    <h1>Register</h1>
-    <form action="" method="post">
-        {{ form.hidden_tag() }}
-        <p>
-            {{ form.username.label }}<br>
-            {{ form.username(size=32) }}<br>
-            {% for error in form.username.errors %}
-            <span style="color: red;">[{{ error }}]</span>
-            {% endfor %}
-        </p>
-        <p>
-            {{ form.email.label }}<br>
-            {{ form.email(size=64) }}<br>
-            {% for error in form.email.errors %}
-            <span style="color: red;">[{{ error }}]</span>
-            {% endfor %}
-        </p>
-        <p>
-            {{ form.password.label }}<br>
-            {{ form.password(size=32) }}<br>
-            {% for error in form.password.errors %}
-            <span style="color: red;">[{{ error }}]</span>
-            {% endfor %}
-        </p>
-        <p>
-            {{ form.password2.label }}<br>
-            {{ form.password2(size=32) }}<br>
-            {% for error in form.password2.errors %}
-            <span style="color: red;">[{{ error }}]</span>
-            {% endfor %}
-        </p>
-        <p>{{ form.submit() }}</p>
-    </form>
-{% endblock %}
+
+    <body>
+        <div class="container">
+
+
+
+            <div class="header">
+                
+                <!--Logo e nome da marca-->
+                <div class="brand">
+                    
+                    <a href="{{ url_for('index') }}" style="text-decoration: none;"><img src="{{url_for('static', filename='images/Logo.png')}}" alt="logo" style="height: 80px;"></a>
+                    <a href="{{ url_for('index') }}" style="text-decoration: none;"><h1>Stay<br>&nbsp;&nbsp;Pawsitive</h1></a>
+                </div>
+
+                <p>Como funciona</p>
+
+                <a href="{{ url_for('login') }}">Cadastrar | Login</a>
+
+                <!--Logo insta-->
+                <img src="{{url_for('static', filename='images/Instagram.png')}}" alt="instagram-logo" style="width: auto; height: 55%;">
+            
+            </div>
+
+            <img src="{{url_for('static', filename='images/imgbin_dog-paw-png 1.png')}}" id="dogpaw" style="top: 84%; left: 4%;">
+            <img src="{{url_for('static', filename='images/imgbin_dog-paw-png 1.png')}}" id="dogpaw" style="top: 19%; left: 77%;">
+            <img src="{{url_for('static', filename='images/imgbin_dog-paw-png 1.png')}}" id="dogpaw" style="top: 155%; left: 83%;">
+
+            <div class="login-container">
+
+
+                <div class="welcome">
+                    <h1 style="margin-left: 40px; font-size: 35px;">Venha fazer parte da nossa comunidade!</h1>
+                    <img src="{{url_for('static', filename='images/dogFeliz.png')}}" alt="cachorro-construtor" style="width: 90%;">
+                </div>
+
+                <div class="registration">
+
+                    <form action="" method="user" novalidate>
+                        {{ form.hidden_tag() }}
+
+                        <div class="form-group">
+                            <label for="username">{{ form.username.label }}</label>
+                            <div class="input-circle">
+                                {{ form.username(size=32) }}
+                            </div>
+                            {% for error in form.username.errors %}
+                            <span style="color: red;">[{{ error }}]</span>
+                            {% endfor %}
+                        </div>
+
+                        <div class="form-group">
+                            <label for="password">{{ form.password.label }}</label>
+                            <div class="input-circle">
+                                {{ form.password(size=32) }}
+                            </div>
+                            {% for error in form.password.errors %}
+                            <span style="color: red;">[{{ error }}]</span>
+                            {% endfor %}
+                        </div>
+
+                        <div class="form-group">
+                            <label for="password2">{{ form.password2.label }}</label>
+                            <div class="input-circle">
+                                {{ form.password2(size=32) }}
+                            </div>
+                            {% for error in form.password2.errors %}
+                            <span style="color: red;">[{{ error }}]</span>
+                            {% endfor %}
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="email">{{ form.email.label }}</label>
+                            <div class="input-circle">
+                                {{ form.email(size=32) }}
+                            </div>
+                            {% for error in form.email.errors %}
+                            <span style="color: red;">[{{ error }}]</span>
+                            {% endfor %}
+                        </div>
+
+                        <div class="form-group">
+                            <label for="phone">{{ form.phone.label }}</label>
+                            <div class="input-circle">
+                                {{ form.phone(size=32) }}
+                            </div>
+                            {% for error in form.phone.errors %}
+                            <span style="color: red;">[{{ error }}]</span>
+                            {% endfor %}
+                        </div>
+
+                        <div class="form-group">
+                            <label for="birth_date">{{ form.birth_date.label }}</label>
+                            <div class="input-circle">
+                                {{ form.birth_date(size=32) }}
+                            </div>
+                            {% for error in form.birth_date.errors %}
+                            <span style="color: red;">[{{ error }}]</span>
+                            {% endfor %}
+                        </div>
+
+                        <div class="form-group">
+                            <label for="address">{{ form.address.label }}</label>
+                            <div class="input-circle">
+                                {{ form.address(size=32) }}
+                            </div>
+                            {% for error in form.address.errors %}
+                            <span style="color: red;">[{{ error }}]</span>
+                            {% endfor %}
+                        </div>
+
+                        <div class="form-group">
+                            <label for="cpf">{{ form.cpf.label }}</label>
+                            <div class="input-circle">
+                                {{ form.cpf(size=32) }}
+                            </div>
+                            {% for error in form.cpf.errors %}
+                            <span style="color: red;">[{{ error }}]</span>
+                            {% endfor %}
+                        </div>
+
+                        <div class="submit-button">
+                            {{ form.submit() }}
+                        </div>
+    
+
+                    </form>
+
+
+                </div>
+            </div>
+
+
+           
+        </div>
+    </body>
+</html>
