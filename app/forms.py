@@ -6,7 +6,6 @@ from app import db
 from app.models import User
 from datetime import datetime
 
-
 class LoginForm(FlaskForm):
     username = StringField('Username', validators=[DataRequired()])
     password = PasswordField('Password', validators=[DataRequired()])
@@ -23,8 +22,12 @@ class RegistrationForm(FlaskForm):
     submit = SubmitField('Register')
     phone = StringField(
         'Phone', validators=[DataRequired(),Length(min=8, message="Minimun 8 digits.")])
-    birth_date = DateField('Birth Date', format='%d-%m-%Y', default=datetime.now().strftime("%Y-%m-%d"),
-                           validators=[DataRequired()])
+    birth_date = DateField(
+        'Birth Date',
+        format='%d-%m-%Y',
+        default=datetime.now(),
+        validators=[DataRequired()]
+    )
     address = StringField('Address', validators=[DataRequired()])
     cpf = StringField('CPF', validators=[DataRequired(), Regexp(r'([0-9]{2}[\.]?[0-9]{3}[\.]?[0-9]{3}[\/]?[0-9]{4}[-]?[0-9]{2})|([0-9]{3}[\.]?[0-9]{3}[\.]?[0-9]{3}[-]?[0-9]{2})')])
 
