@@ -80,23 +80,27 @@
 
                     </form>
 
-
-
-
-
-
-                    
                     <div class="fazer-cadastro-button">
                         <a href="{{ url_for('register') }}"><p>Fazer Cadastro</p></a>
                     </div>
 
                 </div>
+
             </div>
-
-
-           
+            
+            
         </div>
-
+        
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+        <hr>
+        <ul>
+            {% for message in messages %}
+            <li style='color: red'>{{ message }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+        {% endwith %}
         {% endblock %}
     </body>
 </html>

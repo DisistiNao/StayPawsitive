@@ -4,7 +4,7 @@ from wtforms.validators import ValidationError, DataRequired, Email, EqualTo, Le
 import sqlalchemy as sa
 from app import db
 from app.models import User
-from datetime import datetime
+from datetime import datetime, date
 
 class LoginForm(FlaskForm):
     username = StringField('Username', validators=[DataRequired()])
@@ -23,10 +23,9 @@ class RegistrationForm(FlaskForm):
     submit = SubmitField('Register')
     phone = StringField(
         'Phone', validators=[DataRequired(),Length(min=8, message="Minimun 8 digits.")])
-    birth_date = DateField(
+    birthdate = DateField(
         'Birth Date',
-        format='%d-%m-%Y',
-        default=datetime.now())
+        default=date.today())
     address = StringField('Address', validators=[DataRequired()])
     cpf = StringField('CPF', validators=[DataRequired(), Regexp(r'([0-9]{2}[\.]?[0-9]{3}[\.]?[0-9]{3}[\/]?[0-9]{4}[-]?[0-9]{2})|([0-9]{3}[\.]?[0-9]{3}[\.]?[0-9]{3}[-]?[0-9]{2})')])
 

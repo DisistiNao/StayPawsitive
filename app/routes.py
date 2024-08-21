@@ -9,7 +9,7 @@ from app.models import User
 
 @app.route('/')
 @app.route('/index')
-# @login_required
+@login_required
 def index():
     return render_template('index.html', title='Home')
 
@@ -46,7 +46,13 @@ def register():
         return redirect(url_for('index'))
     form = RegistrationForm()
     if form.validate_on_submit():
-        user = User(username=form.username.data, email=form.email.data)
+        user = User(username=form.username.data,
+                    name=form.name.data,
+                    email=form.email.data,
+                    phone=form.phone.data,
+                    birthdate=form.birthdate.data,
+                    address=form.address.data,
+                    cpf=form.cpf.data)
         user.set_password(form.password.data)
         db.session.add(user)
         db.session.commit()

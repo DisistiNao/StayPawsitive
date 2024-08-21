@@ -105,11 +105,11 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="birth_date">{{ form.birth_date.label }}</label>
+                    <label for="birthdate">{{ form.birthdate.label }}</label>
                     <div class="input-circle">
-                        {{ form.birth_date }}
+                        {{ form.birthdate }}
                     </div>
-                    {% for error in form.birth_date.errors %}
+                    {% for error in form.birthdate.errors %}
                     <span style="color: red;">[{{ error }}]</span>
                     {% endfor %}
                 </div>
@@ -140,5 +140,20 @@
             </form>
         </div>
     </div>
+
+    <!-- <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            // Preencher os campos do formulário com dados de exemplo
+            document.getElementById("username").value = "Vitor";
+            document.getElementById("name").value = "Vitor Oliveira";
+            document.getElementById("password").value = "vitor123";
+            document.getElementById("password2").value = "vitor123";
+            document.getElementById("email").value = "vitor@example.com";
+            document.getElementById("phone").value = "31992880613";
+            document.getElementById("birthdate").value = "1990-01-01";
+            document.getElementById("address").value = "Rua Exemplo, 123";
+            document.getElementById("cpf").value = "111283561638";
+        });
+    </script> -->
 </body>
 </html>
