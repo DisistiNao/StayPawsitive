@@ -31,11 +31,37 @@ class RegistrationForm(FlaskForm):
 
 
     def validate_cpf(self, cpf):
+
+        cpf_string = ''.join([c for c in cpf.data if c.isdigit()])
+
+
         user = db.session.scalar(sa.select(User).where(
-            User.cpf == cpf.data))
+            User.cpf == cpf_string))
         
         if user is not None:
-                raise ValidationError('Cpf already registered.')
+            raise ValidationError('Cpf already registered.')
+        
+        
+        # Verificar se o CPF tem 11 dígitos
+        if len(cpf_string) != 11:
+            raise ValidationError('Cpf inválido.')
+
+        
+        # Verificar se todos os dígitos são iguais (caso inválido)
+        if cpf_string == cpf_string[0] * 11:
+            raise ValidationError('Cpf inválido.')
+        
+        # Verificar o primeiro dígito verificador
+        soma = sum(int(cpf_string[i]) * (10 - i) for i in range(9))
+        digit1 = (soma * 10 % 11) % 10
+        if digit1 != int(cpf_string[9]):
+            raise ValidationError('Cpf inválido.')
+        
+        # Verificar o segundo dígito verificador
+        soma = sum(int(cpf_string[i]) * (11 - i) for i in range(10))
+        digito2 = (soma * 10 % 11) % 10
+        if digito2 != int(cpf_string[10]):
+            raise ValidationError('Cpf inválido.')
         
         
 

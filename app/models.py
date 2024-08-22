@@ -30,7 +30,20 @@ class User(UserMixin, db.Model):
 
     def check_password(self, password):
         return check_password_hash(self.password_hash, password)
-
+    
+    def __repr__(self):
+        return '<User {}>'.format(self.username)
+    
+    def print_user(self):
+        print(f"ID: {self.id}")
+        print(f"Username: {self.username}")
+        print(f"Email: {self.email}")
+        print(f"Password Hash: {self.password_hash}")
+        print(f"Name: {self.name}")
+        print(f"Phone: {self.phone}")
+        print(f"Birthdate: {self.birthdate}")
+        print(f"Address: {self.address}")
+        print(f"CPF: {self.cpf}")
 
 @login.user_loader
 def load_user(id):
