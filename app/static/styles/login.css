@@ -195,10 +195,10 @@ a {
 }
 
 .flashed-errors {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    margin-bottom: 20px;
+    align-self: flex-start; /* Alinha a div à esquerda dentro do container flexível */
+    width: 100%; /* Garante que o texto dentro da div ocupe 100% da largura disponível */
+    color: red; /* Cor opcional para os erros */
+    margin-bottom: 10px; /* Espaço opcional abaixo da div */
 }
 
 #error-list {
