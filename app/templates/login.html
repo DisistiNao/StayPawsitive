@@ -48,7 +48,19 @@
 
                 <div class="registration">
 
-                    
+                    <div class ="flashed-errors">
+                        {% with messages = get_flashed_messages() %}
+                        {% if messages %}
+                        <ul id="error-list">
+                            {% for message in messages %}
+                            <li style='color: red'>{{ message }}</li>
+                            {% endfor %}
+                        </ul>
+                        {% endif %}
+                        {% endwith %}
+                        {% endblock %}
+                    </div>
+
 
                     <form action="" method="post" novalidate>
                         {{ form.hidden_tag() }}
@@ -91,16 +103,5 @@
             
         </div>
         
-        {% with messages = get_flashed_messages() %}
-        {% if messages %}
-        <hr>
-        <ul>
-            {% for message in messages %}
-            <li style='color: red'>{{ message }}</li>
-            {% endfor %}
-        </ul>
-        {% endif %}
-        {% endwith %}
-        {% endblock %}
     </body>
 </html>

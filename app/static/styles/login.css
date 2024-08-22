@@ -193,3 +193,14 @@ a {
 .submit-button input:focus {
     outline: none;
 }
+
+.flashed-errors {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-bottom: 20px;
+}
+
+#error-list {
+    padding: 0px;
+}
