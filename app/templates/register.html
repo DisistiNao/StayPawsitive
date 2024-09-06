@@ -1,35 +1,11 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Stay Pawsitive - {{ title }}</title>
-        <link rel="stylesheet" href="{{ url_for('static', filename='styles/base.css') }}">
-        <link rel="stylesheet" href="{{ url_for('static', filename='styles/register.css') }}">
-</head>
-<body>
-    <div class="header">
-        <div class="brand">
-            <a href="{{ url_for('index') }}" style="text-decoration: none;"><img src="{{ url_for('static', filename='images/Logo.png') }}" alt="logo"></a>
-        </div>
+{% extends "base.html" %}
 
-        <p>Como funciona</p>
+{% block head %}
+    {{ super() }}
+    <link rel="stylesheet" href="{{url_for('static', filename='styles/register.css')}}">
+{% endblock head %}
 
-        <div class="right">
-            <div>
-                <a href="{{ url_for('index') }}">Home</a>
-                <!-- {% if current_user.is_anonymous %} -->
-                <a href="{{ url_for('login') }}">Login</a>
-                <!-- {% else %} -->
-                <a href="{{ url_for('logout') }}">Logout</a>
-                <!-- {% endif %} -->
-            </div>
-            <a href="https://www.instagram.com/staypawsitive99/">
-                <img src="{{ url_for('static', filename='images/Instagram.png') }}" alt="instagram-logo">
-            </a>
-        </div>
-    </div>
-
+{% block content %}
     <img src="{{url_for('static', filename='images/imgbin_dog-paw-png 1.png')}}" id="dogpaw" style="top: 84%; left: 4%;">
     <img src="{{url_for('static', filename='images/imgbin_dog-paw-png 1.png')}}" id="dogpaw" style="top: 19%; left: 77%;">
     <img src="{{url_for('static', filename='images/imgbin_dog-paw-png 1.png')}}" id="dogpaw" style="top: 155%; left: 83%;">
@@ -140,20 +116,4 @@
             </form>
         </div>
     </div>
-
-    <!-- <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            // Preencher os campos do formulário com dados de exemplo
-            document.getElementById("username").value = "Vitor";
-            document.getElementById("name").value = "Vitor Oliveira";
-            document.getElementById("password").value = "vitor123";
-            document.getElementById("password2").value = "vitor123";
-            document.getElementById("email").value = "vitor@example.com";
-            document.getElementById("phone").value = "31992880613";
-            document.getElementById("birthdate").value = "1990-01-01";
-            document.getElementById("address").value = "Rua Exemplo, 123";
-            document.getElementById("cpf").value = "111283561638";
-        });
-    </script> -->
-</body>
-</html>
+{% endblock content %}

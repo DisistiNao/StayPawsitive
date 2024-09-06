@@ -1,9 +1,11 @@
 <!doctype html>
 <html>
     <head>
+        {% block head %}
         <title>Stay Pawsitive - {{ title }}</title>
         <link rel="stylesheet" href="{{ url_for('static', filename='styles/base.css') }}">
         <!-- <link rel="stylesheet" href="{{ url_for('static', filename='styles/{{title}}.css') }}"> -->
+        {% endblock head %}
     </head>
     <body>
         <div class="header">
@@ -26,6 +28,7 @@
                     <img src="{{ url_for('static', filename='images/Instagram.png') }}" alt="instagram-logo">
                 </a>
             </div>
-        </div> 
+        </div>
+        {% block content %}{% endblock content %}
     </body>
 </html>
