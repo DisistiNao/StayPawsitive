@@ -9,25 +9,26 @@
     </head>
     <body>
         <div class="header">
+                
+            <!--Logo e nome da marca-->
             <div class="brand">
-                <a href="{{ url_for('index') }}" style="text-decoration: none;"><img src="{{ url_for('static', filename='images/Logo.png') }}" alt="logo"></a>
+                <a href="{{ url_for('index') }}">
+                <img src="{{ url_for('static', filename='images/Logo.png') }}" alt="logo" style="height: 80px;">
+                </a>
+                <a href="{{ url_for('index') }}" style="text-decoration: none;">
+                <h1>Stay<br>&nbsp;&nbsp;Pawsitive</h1>
+                </a>
             </div>
 
             <p>Como funciona</p>
 
-            <div class="right">
-                <div>
-                    <a href="{{ url_for('index') }}">Home</a>
-                    <!-- {% if current_user.is_anonymous %} -->
-                    <a href="{{ url_for('login') }}">Login</a>
-                    <!-- {% else %} -->
-                    <a href="{{ url_for('logout') }}">Logout</a>
-                    <!-- {% endif %} -->
-                </div>
-                <a href="https://www.instagram.com/staypawsitive99/">
-                    <img src="{{ url_for('static', filename='images/Instagram.png') }}" alt="instagram-logo">
-                </a>
-            </div>
+            <a href="{{ url_for('login') }}">Cadastrar | Login</a>
+
+            <!--Logo insta-->
+            <a href="https://www.instagram.com/staypawsitive99/">
+                <img src="{{ url_for('static', filename='images/Instagram.png') }}" alt="instagram-logo">
+            </a>
+            
         </div>
         {% block content %}{% endblock content %}
     </body>

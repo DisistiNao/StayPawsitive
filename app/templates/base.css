@@ -1,0 +1,78 @@
+/*importa a fonte monstserrat*/
+@import url('https://fonts.googleapis.com/css2?family=Montserrat+Alternates:wght@400;700&display=swap');
+/*importa a fonte irish grober*/
+@import url('https://fonts.googleapis.com/css2?family=Irish+Grover&display=swap');
+
+:root {
+    font-size: 62.5%;
+}
+
+body {
+    font-family: 'Montserrat Alternates', sans-serif;
+    font-style: normal;
+    margin: 0;
+    padding: 0;
+}
+
+.header{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+    background-color: #A68F8F;
+    height: 2%;
+    color: #FFFFFF;
+    font-size: 18px;
+    z-index: 5;
+
+}
+
+/*logo e nome da marca*/
+.brand{
+    display: flex;
+    flex-direction: row;
+    align-self: center;
+    justify-content: space-evenly;
+    align-items: center;
+    font-size: 13px;
+    width: 18%;
+    font-family: 'Irish Grover', cursive;
+  
+    
+}
+
+a {
+    color: #FFFFFF; /* Replace #000 with your desired color */
+}
+
+.right {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: flex-end;
+}
+
+.right > div {
+    padding: 0rem 8rem;
+}
+
+.right > div > a {
+    padding: 0rem .8rem;
+}
+
+.right > div > a:link, .right > div > a:visited {
+    text-decoration: none;
+    color: white;
+    font-size: 2.4rem;
+}
+
+.right > div > a:hover {
+    text-decoration: none;
+    color: #F2D5D8;
+    font-size: 2.4rem;
+}
+
+.right > a > img {
+    width: 4rem;
+    height: 4rem;
+}
