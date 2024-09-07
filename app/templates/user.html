@@ -12,7 +12,7 @@
         </div>
         <div class="infos">
             <div class="profile-data">
-                <img src="{{url_for('static', filename='images/profile_photo.png')}}">
+                <img src="{{url_for('static', filename='{}'.format(user.avatar))}}">
                 <div>
                     <div>
                         {{ user.username }}

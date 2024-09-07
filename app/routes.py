@@ -53,6 +53,7 @@ def register():
             address=form.address.data,
             cpf=''.join([c for c in form.cpf.data if c.isdigit()])
         )
+        user.set_avatar()
         user.set_password(form.password.data)
         db.session.add(user)
         db.session.commit()
