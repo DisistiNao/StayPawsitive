@@ -25,12 +25,22 @@
                         {{ phone }}
                     </div>
                 </div>
-                <div>
-                    <a href="#" class="edit-profile">Editar perfil</a>
-                    <a href="#" class="delete-profile">Deletar perfil</a>
-                </div>
+                {% if user == current_user %}
+                    <div>
+                        <a href="{{ url_for('edit_profile') }}" class="edit-profile">Editar perfil</a>
+                        <a href="#" class="delete-profile">Deletar perfil</a>
+                    </div>
+                {% endif %}
+                
             </div>
         </div>
+        {% if user.about_me %}
+            <div class="line"></div>
+            <div class="about-me">
+                <h1>Sobre mim</h1>
+                <p>{{ user.about_me }}</p>
+            </div>
+        {% endif %}
         <div class="line"></div>
         <div class="pets">
             <h1>Pets cadastrados</h1>

@@ -22,6 +22,7 @@ class User(UserMixin, db.Model):
     address: so.Mapped[str] = so.mapped_column(sa.String(64), index=True, unique=False)
     cpf: so.Mapped[str] = so.mapped_column(sa.String(11), index=True, unique=False)
     avatar: so.Mapped[str] = so.mapped_column(sa.String(100), index=True, unique=False)
+    about_me: so.Mapped[Optional[str]] = so.mapped_column(sa.String(140))
 
     def __repr__(self):
         return '<User {}>'.format(self.username)
