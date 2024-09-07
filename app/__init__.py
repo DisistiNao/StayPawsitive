@@ -12,6 +12,11 @@ migrate = Migrate(app, db)
 login = LoginManager(app)
 login.login_view = 'login'
 
+from flask_uploads import UploadSet, configure_uploads, IMAGES
+
+photos = UploadSet('photos', IMAGES)
+configure_uploads(app, photos)
+
 from app import routes, models
 
 import sqlalchemy as sa

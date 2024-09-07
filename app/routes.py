@@ -1,11 +1,13 @@
+import os
 from urllib.parse import urlsplit
 
 from flask import render_template, flash, redirect, url_for, request
 from flask_login import login_user, logout_user, current_user, login_required
 
+from werkzeug.utils import secure_filename
 import sqlalchemy as sa
 
-from app import app, db
+from app import app, db, photos
 from app.forms import LoginForm, RegistrationForm, EditProfileForm
 from app.models import User
 
@@ -97,10 +99,23 @@ def user(username):
 def edit_profile():
     form = EditProfileForm()
     if form.validate_on_submit():
-        current_user.username = form.username.data
+        
+        if form.username.data:
+            current_user.username = form.username.data
         current_user.about_me = form.about_me.data
+
+        if form.image.data:
+            f = form.image.data
+            uploaded_filename = secure_filename(f.filename)
+            _, file_extension = os.path.splitext(uploaded_filename)    
+            filename = "{}{}".format(current_user.username, file_extension)
+
+            f.save(os.path.join(os.path.dirname(__file__),'static','avatar', filename))
+            current_user.avatar = "avatar/{}".format(filename)
+
         db.session.commit()
         flash('Your changes have been saved.')
+
         return redirect(url_for('edit_profile'))
     elif request.method == 'GET':
         form.username.data = current_user.username

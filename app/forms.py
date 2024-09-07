@@ -1,12 +1,18 @@
 from flask_wtf import FlaskForm
 
+from flask_uploads import UploadSet, IMAGES
+from flask_wtf.file import FileField, FileAllowed
+
 from wtforms import StringField, PasswordField, BooleanField, SubmitField, DateField
 from wtforms.validators import ValidationError, DataRequired, Email, EqualTo, Length, Regexp
 from wtforms import TextAreaField
 from wtforms.validators import Length
 
+from werkzeug.utils import secure_filename
+from werkzeug.datastructures import  FileStorage
+
 import sqlalchemy as sa
-from app import db
+from app import db, photos
 from app.models import User
 from datetime import datetime, date
 
@@ -81,7 +87,17 @@ class RegistrationForm(FlaskForm):
         if user is not None:
             raise ValidationError('Please use a different email address.')
 
+
+
 class EditProfileForm(FlaskForm):
-    username = StringField('Username', validators=[DataRequired()])
+    username = StringField('Username', validators=[])
     about_me = TextAreaField('About me', validators=[Length(min=0, max=140)])
+    image = FileField('image', validators=[FileAllowed(photos, 'Somente imagens são aceitas!')])
     submit = SubmitField('Submit')
+    
+    def validate_username(self, username):
+        user = db.session.scalar(sa.select(User).where(
+            User.username == username.data))
+        if user is not None:
+            raise ValidationError('Please use a different username.')
+    
