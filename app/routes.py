@@ -5,11 +5,10 @@ import sqlalchemy as sa
 from app import app, db
 from app.forms import LoginForm, RegistrationForm
 from app.models import User
-
+from datetime import datetime
 
 @app.route('/')
 @app.route('/index')
-# @login_required
 def index():
     return render_template('index.html', title='Home')
 
@@ -39,32 +38,51 @@ def logout():
     return redirect(url_for('index'))
 
 
-
 @app.route('/register', methods=['GET', 'POST'])
 def register():
     if current_user.is_authenticated:
         return redirect(url_for('index'))
     form = RegistrationForm()
     if form.validate_on_submit():
-        user = User(username=form.username.data,
-                    name=form.name.data,
-                    email=form.email.data,
-                    phone=form.phone.data,
-                    birthdate=form.birthdate.data,
-                    address=form.address.data,
-                    cpf=''.join([c for c in form.cpf.data if c.isdigit()]))
+        user = User(
+            username=form.username.data,
+            name=form.name.data,
+            email=form.email.data,
+            phone=form.phone.data,
+            birthdate=form.birthdate.data,
+            address=form.address.data,
+            cpf=''.join([c for c in form.cpf.data if c.isdigit()])
+        )
         user.set_password(form.password.data)
         db.session.add(user)
         db.session.commit()
         flash('Congratulations, you are now a registered user!')
         return redirect(url_for('login'))
+    
     return render_template('register.html', title='Register', form=form)
+
+
+def calculate_age(birthdate):
+    today = datetime.today()
+    age = today.year - birthdate.year - ((today.month, today.day) < (birthdate.month, birthdate.day))
+    return age
+
+
+def format_phone_number(phone):
+    digits = ''.join(filter(str.isdigit, phone))
+    if len(digits) == 11:
+        return f"({digits[:2]}) {digits[2:7]}-{digits[7:]}"
+    return phone
 
 
 @app.route('/user/<username>')
 @login_required
 def user(username):
-    user = db.first_or_404(sa.select(User).where(User.username == username))
-
-    return render_template('user.html', user=user)
-
+    user = db.session.scalar(sa.select(User).where(User.username == username))
+    if user is None:
+        return render_template('404.html'), 404
+    
+    age = calculate_age(user.birthdate)
+    formatted_phone = format_phone_number(user.phone)
+    
+    return render_template('user.html', user=user, age=age, phone=formatted_phone)

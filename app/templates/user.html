@@ -1,6 +1,80 @@
 {% extends "base.html" %}
 
+{% block head %}
+    {{ super() }}
+    <link rel="stylesheet" href="{{url_for('static', filename='styles/user.css')}}">
+{% endblock head %}
+
 {% block content %}
-    <h1>User: {{ user.username }}</h1>
-    <hr>
+    <div class="container">
+        <div class="title">
+            Meu perfil
+        </div>
+        <div class="infos">
+            <div class="profile-data">
+                <img src="{{url_for('static', filename='images/profile_photo.png')}}">
+                <div>
+                    <div>
+                        {{ user.username }}
+                        <br>
+                        {{ age }} anos
+                    </div>
+                    <div>
+                        Número para contato:
+                        <br>
+                        {{ phone }}
+                    </div>
+                </div>
+                <div>
+                    <a href="#" class="edit-profile">Editar perfil</a>
+                    <a href="#" class="delete-profile">Deletar perfil</a>
+                </div>
+            </div>
+        </div>
+        <div class="line"></div>
+        <div class="pets">
+            <h1>Pets cadastrados</h1>
+            <div class="list">
+                <div>
+                    <img src="{{url_for('static', filename='images/pet3.png')}}">
+                    <p>Nome: Apollo</p>
+                    <p>Raça: Beagle</p>
+                    <p>Sexo: Masculino</p>
+                </div>
+                <div>
+                    <img src="{{url_for('static', filename='images/pet2.png')}}">
+                    <p>Nome: Zeus</p>
+                    <p>Raça: Husky</p>
+                    <p>Sexo: Masculino</p>
+                </div>
+                <div>
+                    <img src="{{url_for('static', filename='images/pet1.png')}}">
+                    <p>Nome: Hefesto</p>
+                    <p>Raça: Dobermann</p>
+                    <p>Sexo: Masculino</p>
+                </div>
+            </div>
+            <button>Cadastrar um pet</button>
+        </div>
+        <div class="line"></div>
+        <div class="services">
+            <h1>Serviços cadastrados</h1>
+            <div class="list">
+                <div>
+                    <img src="{{url_for('static', filename='images/hospedagem.png')}}">
+                    <p>Tipo: Hospedagem</p>
+                    <p>Dia: 06/09/2024</p>
+                    <p>Endereço: Rua Augusta, 302  - SP/SP</p>
+                </div>
+                <div>
+                    <img src="{{url_for('static', filename='images/passeio.png')}}">
+                    <p>Tipo: Passeio</p>
+                    <p>Dias: 15/03/2025 - 17/03/2024</p>
+                    <p>Período: 13:00 - 19:00</p>
+                    <p>Número máximo de pets: 2</p>
+                </div>
+            </div>
+            <button>Cadastrar um serviço</button>
+        </div>
+    </div>
 {% endblock %}
