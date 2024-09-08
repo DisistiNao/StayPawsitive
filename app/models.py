@@ -94,7 +94,15 @@ class Service(db.Model):
     boarding_id: so.Mapped[str] = so.mapped_column(sa.ForeignKey(PossiblePetBoarding.id), nullable=True)
     walk_id: so.Mapped[str] = so.mapped_column(sa.ForeignKey(PossibleWalk.id),nullable=True)
 
+    def __repr__(self):
+        service_type = ""
+        if self.boarding_id:
+            service_type.join("Pet Boarding")
+        else:
+            service_type.join("Pet Walking")
+        return "Service id: {}\n Service type: {}".format(self.id, service_type)
 
+# 
     
  
 
