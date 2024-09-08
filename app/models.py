@@ -1,6 +1,7 @@
-from datetime import datetime, timezone
+from datetime import datetime, timezone, time, date
 from typing import Optional
 import sqlalchemy as sa
+from sqlalchemy import Date, Time
 import sqlalchemy.orm as so
 from flask_login import UserMixin
 from werkzeug.security import generate_password_hash, check_password_hash
@@ -53,3 +54,59 @@ class User(UserMixin, db.Model):
 @login.user_loader
 def load_user(id):
     return db.session.get(User, int(id))
+
+class Pet(db.Model):
+    name: so.Mapped[str] = so.mapped_column(sa.String(64), index=True, primary_key=True)
+    username: so.Mapped[str] = so.mapped_column(sa.ForeignKey(User.username), index=True, primary_key=True)
+    photo: so.Mapped[str] = so.mapped_column(sa.String(100))
+    breed: so.Mapped[str] = so.mapped_column(sa.String(40))
+    sex: so.Mapped[str] = so.mapped_column(sa.String(10))
+    friendly: so.Mapped[str] = so.mapped_column(sa.String(10))
+
+    def __repr__(self):
+        return "Pet name: {}\n owner:{}".format(self.name, self.username)
+
+class PossibleWalk(db.Model):
+    id: so.Mapped[int] = so.mapped_column(primary_key = True, index=True)
+    max_pets: so.Mapped[int] = so.mapped_column()
+    date: so.Mapped[date] = so.mapped_column(Date)
+    start_hour: so.Mapped[time] = so.mapped_column(Time)
+    end_hour: so.Mapped[time] = so.mapped_column(Time)
+    username: so.Mapped[str] = so.mapped_column(sa.ForeignKey(User.username), index=True)
+    def __repr__(self):
+        return "Possible Walk id: {}\n Possible date: {}, from {} to {}".format(self.id, self.date, self.startHour, self.endHour)
+        
+class PossiblePetBoarding(db.Model):
+    id: so.Mapped[int] = so.mapped_column(primary_key = True, index=True)
+    max_pets: so.Mapped[int] = so.mapped_column()
+    start_date: so.Mapped[date] = so.mapped_column(Date)
+    end_date: so.Mapped[date] = so.mapped_column(Date)
+    username: so.Mapped[str] = so.mapped_column(sa.ForeignKey(User.username), index=True)
+    def __repr__(self):
+        return "Possible Pet Boarding id: {}\n Possible date: from {} to {}".format(self.id, self.start_date, self.end_date)
+
+# 
+class Service(db.Model):
+    id: so.Mapped[int] = so.mapped_column(primary_key = True, index=True)
+    status: so.Mapped[str] = so.mapped_column(sa.String(20))
+    username: so.Mapped[str] = so.mapped_column(sa.ForeignKey(User.username), index=True)
+    pet_name: so.Mapped[str] = so.mapped_column(sa.ForeignKey(Pet.name))
+    boarding_id: so.Mapped[str] = so.mapped_column(sa.ForeignKey(PossiblePetBoarding.id), nullable=True)
+    walk_id: so.Mapped[str] = so.mapped_column(sa.ForeignKey(PossibleWalk.id),nullable=True)
+
+
+    
+ 
+
+
+    # id: so.Mapped[int] = so.mapped_column(primary_key=True)
+    # body: so.Mapped[str] = so.mapped_column(sa.String(140))
+    # timestamp: so.Mapped[datetime] = so.mapped_column(
+    #     index=True, default=lambda: datetime.now(timezone.utc))
+    # user_id: so.Mapped[int] = so.mapped_column(sa.ForeignKey(User.id),
+    #                                            index=True)
+
+    # author: so.Mapped[User] = so.relationship(back_populates='posts')
+
+    # def __repr__(self):
+    #     return '<Post {}>'.format(self.body)
