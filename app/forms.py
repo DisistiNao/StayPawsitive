@@ -15,7 +15,7 @@ from werkzeug.datastructures import  FileStorage
 import sqlalchemy as sa
 
 from app import db, photos
-from app.models import User
+from app.models import User, Pet
 from datetime import datetime, date, time
 
 class LoginForm(FlaskForm):
@@ -142,7 +142,7 @@ class PetForm(FlaskForm):
 
     def validate_name(self, name):
         # Verifica se já existe um pet com o mesmo nome e dono
-        existing_pet = db.sesion.query.filter_by(name=name.data, username=current_user.username).first()
+        existing_pet = db.session.query(Pet).filter_by(name=name.data, username=current_user.username).first()
         if existing_pet:
             raise ValidationError('Já existe um pet com esse nome registrado para esse usuário.')
 

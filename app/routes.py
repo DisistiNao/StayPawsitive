@@ -145,8 +145,8 @@ def new_pet():
             friendly = form.friendly.data
         )
 
-        if form.image.data:
-            f = form.image.data
+        if form.photo.data:
+            f = form.photo.data
             uploaded_filename = secure_filename(f.filename)
             _, file_extension = os.path.splitext(uploaded_filename)    
             filename = "{}_{}{}".format(current_user.username, form.name.data, file_extension)
@@ -160,8 +160,9 @@ def new_pet():
 
         formatted_phone = format_phone_number(current_user.phone)
         
-        return render_template('user.html', user=current_user, age=current_user.age, phone=formatted_phone)
-
+        age = calculate_age(current_user.birthdate)
+        return render_template('user.html', user=current_user, age=age, phone=formatted_phone)
+    return render_template('new_pet.html', title='Regiter Pet', form=form)
 
 @app.route('/new_walk', methods=['GET', 'POST'])
 @login_required
