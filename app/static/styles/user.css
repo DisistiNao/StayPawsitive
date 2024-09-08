@@ -18,11 +18,12 @@ html {
 }
 
 .container {
+    width: 85%;
     background-color: #F2EBEC;
-    margin: 4% 4%;
+    margin-left: 7%;
+    margin-top: 5%;
     border: 1px solid #F2D5D8;
     border-radius: 24px;
-
     padding-bottom: 4%;
 }
 
@@ -31,7 +32,7 @@ html {
     padding: 1% 2%;
     border-radius: 24px;
 
-    font-size: 48px;
+    font-size: 35px;
     font-weight: 700;
 }
 
@@ -43,14 +44,15 @@ html {
     display: flex;
     justify-content: space-between;
 
-    font-size: 48px;
+    font-size: 30px;
 
     padding-top: 2%;
 }
 
 .profile-data > img {
     border-radius: 50%;
-    max-width: 30%;
+    border: 1px solid black;
+    max-width: 25%;
     height: auto;
 }
 
@@ -70,7 +72,7 @@ a:visited {
 }
 
 .profile-data > div > a {
-    font-size: 40px;
+    font-size: 23px;
     font-weight: 400;
 }
 
@@ -82,7 +84,20 @@ a:visited {
     color: #FF0000;
 }
 
-.pets,
+.pets{
+    display: flex;
+    flex-direction: column;
+    
+}
+
+.pets-list{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    margin: 20px;
+}
+
 .about-me,
 .services {
     padding: 0% 8%;
@@ -91,7 +106,7 @@ a:visited {
     flex-direction: column;
 }
 
-.pets > h1,
+.pet-info > h1,
 .about-me > h1,
 .services > h1 {
     font-size: 48px;
@@ -102,7 +117,7 @@ a:visited {
 .services > button {
     background-color: #F2D5D8;
 
-    font-size: 40px;
+    font-size: 25px;
     font-weight: 400;
 
     padding: 1%;
@@ -110,9 +125,21 @@ a:visited {
     border: 1px solid black;
 
     align-self: flex-end;
+    margin-right: 5rem;
     margin-top: 1rem;
 }
 
+.pet-cards{
+    width: 33%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    border-radius: 10px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+
+}
 
 .about-me > p {
     font-size: 32px;
@@ -121,18 +148,25 @@ a:visited {
 
 .list {
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
     text-align: center;
+    font-size: 20px;
 }
 
-.list > div > img {
-    border-radius: 50%;
-    width: 400px;
+.list img {
+    width: 27rem;
     height: auto;
 }
 
-.list > div > p {
-    font-size: 40px;
+.pet-cards img {
+    border-radius: 50%;
+    width: 27rem;
+    height: 25rem;
+    border: 1px solid black;
+}
+
+.pet-info  p {
+    font-size: 20px;
     font-weight: 400;
 }
 
