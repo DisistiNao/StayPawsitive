@@ -1,41 +1,52 @@
 {% extends "base.html" %}
 
+{% block head %}
+    {{ super() }}
+    <link rel="stylesheet" href="{{url_for('static', filename='styles/edit_profile.css')}}">
+{% endblock head %}
+
 {% block content %}
-
-    {% with messages = get_flashed_messages() %}
-    {% if messages %}
-    <ul>
-        {% for message in messages %}
-        <li>{{ message }}</li>
-        {% endfor %}
-    </ul>
-    {% endif %}
-    {% endwith %}
-    <h1>Editar Perfil</h1>
-    <form action="" method="post" enctype="multipart/form-data">
-        {{ form.hidden_tag() }}
-        <p>
-            {{ form.username.label }}<br>
-            {{ form.username(size=32) }}<br>
-            {% for error in form.username.errors %}
-            <span style="color: red;">[{{ error }}]</span>
-            {% endfor %}
-        </p>
-        <p>
-            {{ form.about_me.label }}<br>
-            {{ form.about_me(cols=50, rows=4) }}<br>
-            {% for error in form.about_me.errors %}
-            <span style="color: red;">[{{ error }}]</span>
-            {% endfor %}
-        </p>
-        <p>
-            {{ form.image.label }}<br>
-            {{ form.image }}<br>
-            {% for error in form.image.errors %}
-            <span style="color: red;">[{{ error }}]</span>
-            {% endfor %}
-        </p>
-
-        <p>{{ form.submit() }}</p>
-    </form>
+    <div class="container">
+        <div class="title">
+            Editar Perfil
+        </div>
+        <div class="form">
+            {% with messages = get_flashed_messages() %}
+            {% if messages %}
+            <ul>
+                {% for message in messages %}
+                <li>{{ message }}</li>
+                {% endfor %}
+            </ul>
+            {% endif %}
+            {% endwith %}
+    
+            <form action="" method="post" enctype="multipart/form-data">
+                {{ form.hidden_tag() }}
+                <p>
+                    {{ form.username.label }}<br>
+                    {{ form.username(size=32) }}<br>
+                    {% for error in form.username.errors %}
+                    <span>[{{ error }}]</span>
+                    {% endfor %}
+                </p>
+                <p>
+                    {{ form.about_me.label }}<br>
+                    {{ form.about_me(cols=50, rows=4) }}<br>
+                    {% for error in form.about_me.errors %}
+                    <span>[{{ error }}]</span>
+                    {% endfor %}
+                </p>
+                <p>
+                    {{ form.image.label }}<br>
+                    {{ form.image }}<br>
+                    {% for error in form.image.errors %}
+                    <span>[{{ error }}]</span>
+                    {% endfor %}
+                </p>
+    
+                <p>{{ form.submit() }}</p>
+            </form>
+        </div>
+    </div>
 {% endblock %}

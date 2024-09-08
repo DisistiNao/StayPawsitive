@@ -1,0 +1,61 @@
+/*importa a fonte monstserrat*/
+@import url('https://fonts.googleapis.com/css2?family=Montserrat+Alternates:wght@400;700&display=swap');
+/*importa a fonte irish grober*/
+@import url('https://fonts.googleapis.com/css2?family=Irish+Grover&display=swap');
+
+body {
+    font-family: 'Montserrat Alternates', sans-serif;
+    font-style: normal;
+    margin: 0;
+    padding: 0;
+    min-height: 1000px;
+}
+
+html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+}
+
+.container {
+    background-color: #F2EBEC;
+    margin: 4% 4%;
+    border: 1px solid #F2D5D8;
+    border-radius: 24px;
+
+    padding-bottom: 4%;
+}
+
+.title {
+    background-color: #F2D5D8;
+    padding: 1% 2%;
+    border-radius: 24px;
+
+    font-size: 48px;
+    font-weight: 700;
+}
+
+.form {
+    padding: 2% 4%;
+}
+
+.form > form > p > label {
+    font-size: 32px;
+}
+
+.form > form > p > input,
+.form > form > p > textarea {
+    /* font-size: 24; */
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+.form > form > p > span {
+    font-size: 16px;
+    color: red;
+}
