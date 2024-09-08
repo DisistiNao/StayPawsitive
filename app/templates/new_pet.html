@@ -32,6 +32,14 @@
                 </p>
         
                 <p>
+                    {{ form.pet_type.label }}<br>
+                    {{ form.pet_type(size=1) }}<br>
+                    {% for error in form.pet_type.errors %}
+                    <span style="color: red;">[{{ error }}]</span>
+                    {% endfor %}
+                </p>
+
+                <p>
                     {{ form.photo.label }}<br>
                     {{ form.photo }}<br>
                     {% for error in form.photo.errors %}

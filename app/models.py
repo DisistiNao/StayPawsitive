@@ -58,6 +58,7 @@ def load_user(id):
 class Pet(db.Model):
     name: so.Mapped[str] = so.mapped_column(sa.String(64), index=True, primary_key=True)
     username: so.Mapped[str] = so.mapped_column(sa.ForeignKey(User.username), index=True, primary_key=True)
+    pet_type: so.Mapped[str] = so.mapped_column(sa.String(50))
     photo: so.Mapped[str] = so.mapped_column(sa.String(100))
     breed: so.Mapped[str] = so.mapped_column(sa.String(40))
     sex: so.Mapped[str] = so.mapped_column(sa.String(10))
@@ -69,7 +70,7 @@ class Pet(db.Model):
 class PossibleWalk(db.Model):
     id: so.Mapped[int] = so.mapped_column(primary_key = True, index=True)
     max_pets: so.Mapped[int] = so.mapped_column()
-    date: so.Mapped[date] = so.mapped_column(Date)
+    date: so.Mapped[datetime.date] = so.mapped_column(Date)
     start_hour: so.Mapped[time] = so.mapped_column(Time)
     end_hour: so.Mapped[time] = so.mapped_column(Time)
     username: so.Mapped[str] = so.mapped_column(sa.ForeignKey(User.username), index=True)
@@ -85,7 +86,6 @@ class PossiblePetBoarding(db.Model):
     def __repr__(self):
         return "Possible Pet Boarding id: {}\n Possible date: from {} to {}".format(self.id, self.start_date, self.end_date)
 
-# 
 class Service(db.Model):
     id: so.Mapped[int] = so.mapped_column(primary_key = True, index=True)
     status: so.Mapped[str] = so.mapped_column(sa.String(20))

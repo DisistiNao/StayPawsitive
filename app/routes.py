@@ -9,9 +9,10 @@ import sqlalchemy as sa
 
 from app import app, db, photos
 from app.forms import LoginForm, RegistrationForm, EditProfileForm, PetForm, PossibleWalkForm
-from app.models import User
+from app.models import User, Pet
 
 from datetime import datetime
+
 
 @app.route('/')
 @app.route('/index')
@@ -85,6 +86,7 @@ def format_phone_number(phone):
 @app.route('/user/<username>')
 @login_required
 def user(username):
+
     user = db.session.scalar(sa.select(User).where(User.username == username))
     if user is None:
         return render_template('404.html'), 404
@@ -92,7 +94,9 @@ def user(username):
     age = calculate_age(user.birthdate)
     formatted_phone = format_phone_number(user.phone)
     
-    return render_template('user.html', user=user, age=age, phone=formatted_phone)
+    pets = db.session.query(Pet).join(User).filter(User.username == current_user.username).all()
+    
+    return render_template('user.html', user=user, age=age, phone=formatted_phone, pets=pets)
 
 @app.route('/edit_profile', methods=['GET', 'POST'])
 @login_required
@@ -118,7 +122,6 @@ def edit_profile():
 
         return redirect(url_for('edit_profile'))
     elif request.method == 'GET':
-        form.username.data = current_user.username
         form.about_me.data = current_user.about_me
     return render_template('edit_profile.html', title='Edit Profile',
                            form=form)
@@ -128,29 +131,37 @@ def edit_profile():
 @login_required
 def new_pet():
     form = PetForm()
+
     if form.validate_on_submit():
         
-        # current_user.username = form.username.data
         
+        pet = Pet(
+            name = form.name.data,
+            username = current_user.username,
+            pet_type = form.pet_type.data,
+            photo = "petPhotos/dog_placeholder.png" if form.pet_type.data == 'dog' else "petPhotos/cat_placeholder.png",
+            breed = form.breed.data,
+            sex = form.sex.data,
+            friendly = form.friendly.data
+        )
 
-        # if form.image.data:
-        #     f = form.image.data
-        #     uploaded_filename = secure_filename(f.filename)
-        #     _, file_extension = os.path.splitext(uploaded_filename)    
-        #     filename = "{}{}".format(current_user.username, file_extension)
+        if form.image.data:
+            f = form.image.data
+            uploaded_filename = secure_filename(f.filename)
+            _, file_extension = os.path.splitext(uploaded_filename)    
+            filename = "{}_{}{}".format(current_user.username, form.name.data, file_extension)
 
-        #     f.save(os.path.join(os.path.dirname(__file__),'static','avatar', filename))
-        #     current_user.avatar = "avatar/{}".format(filename)
+            f.save(os.path.join(os.path.dirname(__file__),'static','petPhotos', filename))
+            pet.photo = "petPhotos/{}".format(filename)
+            
+        db.session.add(pet)
+        db.session.commit()
+        flash('Seu pet foia adicionado.')
 
-        # db.session.commit()
-        # flash('Your changes have been saved.')
+        formatted_phone = format_phone_number(current_user.phone)
+        
+        return render_template('user.html', user=current_user, age=current_user.age, phone=formatted_phone)
 
-        return redirect(url_for('new_pet'))
-    # elif request.method == 'GET':
-    #     form.name.data = current_user.username
-    #     form.about_me.data = current_user.about_me
-    return render_template('new_pet.html', title='Cadastrar Pet',
-                           form=form)
 
 @app.route('/new_walk', methods=['GET', 'POST'])
 @login_required
@@ -158,6 +169,7 @@ def new_walk():
     form = PossibleWalkForm()
     if form.validate_on_submit():
         
+        # Pet = 
         # current_user.username = form.username.data
         
 

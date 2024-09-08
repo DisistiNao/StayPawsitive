@@ -1,7 +1,8 @@
 from flask_wtf import FlaskForm
 
-from flask_uploads import UploadSet, IMAGES
 from flask_wtf.file import FileField, FileAllowed
+
+from flask_login import current_user
 
 from wtforms import SelectField, DateField, IntegerField, StringField, PasswordField, BooleanField, SubmitField, DateField, TimeField
 from wtforms.validators import ValidationError, DataRequired, Email, EqualTo, Length, Regexp, NumberRange
@@ -12,6 +13,7 @@ from werkzeug.utils import secure_filename
 from werkzeug.datastructures import  FileStorage
 
 import sqlalchemy as sa
+
 from app import db, photos
 from app.models import User
 from datetime import datetime, date, time
@@ -116,11 +118,17 @@ class PossibleWalkForm(FlaskForm):
 
     def validate_end_hour(self, field):
         if self.start_hour.data and field.data:
-            if field.data <= form.start_hour.data:
+            if field.data <= self.start_hour.data:
                 raise ValidationError("O horário de término deve ser após o horário de início.")
 
 class PetForm(FlaskForm):
     name = StringField('Pet name', validators = [DataRequired()])
+    pet_type = SelectField(
+        'Tipo de Pet',
+        choices=[
+            ('dog', 'Cachorro'),
+            ('cat', 'Gato')
+        ], validators=[DataRequired()])
     photo = FileField('Foto do pet', validators=[FileAllowed(photos, 'Somente imagens são aceitas!')])
     breed = StringField('Raça', validators = [DataRequired()])
     sex = SelectField(
@@ -131,3 +139,10 @@ class PetForm(FlaskForm):
         ], validators=[DataRequired()])
     friendly = BooleanField('É amigável?', validators=[DataRequired()])
     submit = SubmitField('Submit')
+
+    def validate_name(self, name):
+        # Verifica se já existe um pet com o mesmo nome e dono
+        existing_pet = db.sesion.query.filter_by(name=name.data, username=current_user.username).first()
+        if existing_pet:
+            raise ValidationError('Já existe um pet com esse nome registrado para esse usuário.')
+
