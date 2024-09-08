@@ -1,59 +1,71 @@
 {% extends "base.html" %}
 
+{% block head %}
+    {{ super() }}
+    <link rel="stylesheet" href="{{url_for('static', filename='styles/forms.css')}}">
+{% endblock head %}
+
 {% block content %}
+    <div class="container">
+        <div class="title">
+            Cadastrar Pet
+        </div>
+        <div class="form">
+            {% with messages = get_flashed_messages() %}
+            {% if messages %}
+            <ul>
+                {% for message in messages %}
+                <li>{{ message }}</li>
+                {% endfor %}
+            </ul>
+            {% endif %}
+            {% endwith %}
+            <h1>Cadastrar Pet</h1>
+            <form action="" method="post" enctype="multipart/form-data">
+                {{ form.hidden_tag() }}
+                <p>
+                    {{ form.name.label }}<br>
+                    {{ form.name(size=32) }}<br>
+                    {% for error in form.name.errors %}
+                    <span>[{{ error }}]</span>
+                    {% endfor %}
+                </p>
+        
+                <p>
+                    {{ form.photo.label }}<br>
+                    {{ form.photo }}<br>
+                    {% for error in form.photo.errors %}
+                    <span>[{{ error }}]</span>
+                    {% endfor %}
+                </p>
+        
+                <p>
+                    {{ form.breed.label }}<br>
+                    {{ form.breed(size=32) }}<br>
+                    {% for error in form.breed.errors %}
+                    <span>[{{ error }}]</span>
+                    {% endfor %}
+                </p>
+        
+                <p>
+                    {{ form.sex.label }}<br>
+                    {{ form.sex(size=1) }}<br>
+                    {% for error in form.sex.errors %}
+                    <span>[{{ error }}]</span>
+                    {% endfor %}
+                </p>
+        
+                <p class="checkbox">
+                    {{ form.friendly.label }}
+                    {{ form.friendly(size=32) }}
+                    {% for error in form.friendly.errors %}
+                    <span>[{{ error }}]</span>
+                    {% endfor %}
+                </p>
+        
+                <p>{{ form.submit() }}</p>
+            </form>
+        </div>
+    </div>
 
-    {% with messages = get_flashed_messages() %}
-    {% if messages %}
-    <ul>
-        {% for message in messages %}
-        <li>{{ message }}</li>
-        {% endfor %}
-    </ul>
-    {% endif %}
-    {% endwith %}
-    <h1>Cadastrar Pet</h1>
-    <form action="" method="post" enctype="multipart/form-data">
-        {{ form.hidden_tag() }}
-        <p>
-            {{ form.name.label }}<br>
-            {{ form.name(size=32) }}<br>
-            {% for error in form.name.errors %}
-            <span style="color: red;">[{{ error }}]</span>
-            {% endfor %}
-        </p>
-
-        <p>
-            {{ form.photo.label }}<br>
-            {{ form.photo }}<br>
-            {% for error in form.photo.errors %}
-            <span style="color: red;">[{{ error }}]</span>
-            {% endfor %}
-        </p>
-
-        <p>
-            {{ form.breed.label }}<br>
-            {{ form.breed(size=32) }}<br>
-            {% for error in form.breed.errors %}
-            <span style="color: red;">[{{ error }}]</span>
-            {% endfor %}
-        </p>
-
-        <p>
-            {{ form.sex.label }}<br>
-            {{ form.sex(size=1) }}<br>
-            {% for error in form.sex.errors %}
-            <span style="color: red;">[{{ error }}]</span>
-            {% endfor %}
-        </p>
-
-        <p>
-            {{ form.friendly.label }}<br>
-            {{ form.friendly(size=32) }}<br>
-            {% for error in form.friendly.errors %}
-            <span style="color: red;">[{{ error }}]</span>
-            {% endfor %}
-        </p>
-
-        <p>{{ form.submit() }}</p>
-    </form>
 {% endblock %}
