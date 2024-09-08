@@ -42,33 +42,30 @@
             </div>
         {% endif %}
         <div class="line"></div>
+        <h1 style="font-weight: bold; font-size: 28px; margin-left: 40px;">Pets cadastrados</h1>
         <div class="pets">
-            <h1>Pets cadastrados</h1>
-            <div class="list">
-                <div>
-                    <img src="{{url_for('static', filename='images/pet3.png')}}">
-                    <p>Nome: Apollo</p>
-                    <p>Raça: Beagle</p>
-                    <p>Sexo: Masculino</p>
+            
+            <div class="pets-list">
+
+                {% for pet in pets %}
+                <div class="pet-cards">
+                    <div class="pet-image">
+                        <img src="{{url_for('static', filename=pet.photo)}}">
+                    </div>
+                    <div class="pet-info">
+                        <p>Nome: {{pet.name}} </p>
+                        <p>Raça: {{pet.breed}} </p>
+                        <p>Sexo: {{pet.sex}} </p>
+                    </div>
                 </div>
-                <div>
-                    <img src="{{url_for('static', filename='images/pet2.png')}}">
-                    <p>Nome: Zeus</p>
-                    <p>Raça: Husky</p>
-                    <p>Sexo: Masculino</p>
-                </div>
-                <div>
-                    <img src="{{url_for('static', filename='images/pet1.png')}}">
-                    <p>Nome: Hefesto</p>
-                    <p>Raça: Dobermann</p>
-                    <p>Sexo: Masculino</p>
-                </div>
+                {% endfor%}
+
             </div>
             <button onclick="redirect_new_pet()">Cadastrar um pet</button>
         </div>
         <div class="line"></div>
+        <h1 style="font-weight: bold; font-size: 28px; margin-left: 40px;">Serviços cadastrados</h1>
         <div class="services">
-            <h1>Serviços cadastrados</h1>
             <div class="list">
                 <div>
                     <img src="{{url_for('static', filename='images/hospedagem.png')}}">
