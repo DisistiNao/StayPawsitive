@@ -64,7 +64,7 @@
                     <p>Sexo: Masculino</p>
                 </div>
             </div>
-            <button>Cadastrar um pet</button>
+            <button onclick="redirect_new_pet()">Cadastrar um pet</button>
         </div>
         <div class="line"></div>
         <div class="services">
@@ -84,7 +84,19 @@
                     <p>Número máximo de pets: 2</p>
                 </div>
             </div>
-            <button>Cadastrar um serviço</button>
+            <button onclick="redirect_new_walk()">Cadastrar um serviço</button>
         </div>
     </div>
+
+
+    <script>
+        function redirect_new_pet() {
+            window.location.href = "{{ url_for('new_pet') }}"
+        }
+
+        function redirect_new_walk(){
+            window.location.href = "{{ url_for('new_walk') }}"
+
+        }
+    </script>
 {% endblock %}

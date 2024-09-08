@@ -1,7 +1,7 @@
 from datetime import datetime, timezone, time, date
 from typing import Optional
 import sqlalchemy as sa
-from sqlalchemy import Date, Time
+from sqlalchemy import Date, Time, Boolean
 import sqlalchemy.orm as so
 from flask_login import UserMixin
 from werkzeug.security import generate_password_hash, check_password_hash
@@ -61,7 +61,7 @@ class Pet(db.Model):
     photo: so.Mapped[str] = so.mapped_column(sa.String(100))
     breed: so.Mapped[str] = so.mapped_column(sa.String(40))
     sex: so.Mapped[str] = so.mapped_column(sa.String(10))
-    friendly: so.Mapped[str] = so.mapped_column(sa.String(10))
+    friendly: so.Mapped[bool] = so.mapped_column(Boolean)
 
     def __repr__(self):
         return "Pet name: {}\n owner:{}".format(self.name, self.username)
@@ -101,20 +101,3 @@ class Service(db.Model):
         else:
             service_type.join("Pet Walking")
         return "Service id: {}\n Service type: {}".format(self.id, service_type)
-
-# 
-    
- 
-
-
-    # id: so.Mapped[int] = so.mapped_column(primary_key=True)
-    # body: so.Mapped[str] = so.mapped_column(sa.String(140))
-    # timestamp: so.Mapped[datetime] = so.mapped_column(
-    #     index=True, default=lambda: datetime.now(timezone.utc))
-    # user_id: so.Mapped[int] = so.mapped_column(sa.ForeignKey(User.id),
-    #                                            index=True)
-
-    # author: so.Mapped[User] = so.relationship(back_populates='posts')
-
-    # def __repr__(self):
-    #     return '<Post {}>'.format(self.body)

@@ -3,8 +3,8 @@ from flask_wtf import FlaskForm
 from flask_uploads import UploadSet, IMAGES
 from flask_wtf.file import FileField, FileAllowed
 
-from wtforms import StringField, PasswordField, BooleanField, SubmitField, DateField
-from wtforms.validators import ValidationError, DataRequired, Email, EqualTo, Length, Regexp
+from wtforms import SelectField, DateField, IntegerField, StringField, PasswordField, BooleanField, SubmitField, DateField, TimeField
+from wtforms.validators import ValidationError, DataRequired, Email, EqualTo, Length, Regexp, NumberRange
 from wtforms import TextAreaField
 from wtforms.validators import Length
 
@@ -14,7 +14,7 @@ from werkzeug.datastructures import  FileStorage
 import sqlalchemy as sa
 from app import db, photos
 from app.models import User
-from datetime import datetime, date
+from datetime import datetime, date, time
 
 class LoginForm(FlaskForm):
     username = StringField('Username', validators=[DataRequired()])
@@ -101,3 +101,33 @@ class EditProfileForm(FlaskForm):
         if user is not None:
             raise ValidationError('Please use a different username.')
     
+
+class PossibleWalkForm(FlaskForm):
+    max_pets = IntegerField('Número máximo de pets', validators = [DataRequired(),
+        NumberRange(min=1, message="O número deve ser maior ou igual a 1.")])
+    date = DateField('Data para a caminhada', validators = [DataRequired()])
+    start_hour = TimeField('Horário de inicio da caminhada', format='%H:%M', validators=[DataRequired()])
+    end_hour = TimeField('Horário de término da caminhada', format='%H:%M', validators=[DataRequired()])
+    submit = SubmitField('Submit')
+    
+    def validate_date(self, field):
+        if field.data < date.today():
+            raise ValidationError("A data não pode ser anterior ao dia de hoje.")
+
+    def validate_end_hour(self, field):
+        if self.start_hour.data and field.data:
+            if field.data <= form.start_hour.data:
+                raise ValidationError("O horário de término deve ser após o horário de início.")
+
+class PetForm(FlaskForm):
+    name = StringField('Pet name', validators = [DataRequired()])
+    photo = FileField('Foto do pet', validators=[FileAllowed(photos, 'Somente imagens são aceitas!')])
+    breed = StringField('Raça', validators = [DataRequired()])
+    sex = SelectField(
+        'Gênero do Pet',
+        choices=[
+            ('male', 'Macho'),
+            ('female', 'Fêmea')
+        ], validators=[DataRequired()])
+    friendly = BooleanField('É amigável?', validators=[DataRequired()])
+    submit = SubmitField('Submit')

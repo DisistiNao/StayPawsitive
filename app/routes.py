@@ -8,7 +8,7 @@ from werkzeug.utils import secure_filename
 import sqlalchemy as sa
 
 from app import app, db, photos
-from app.forms import LoginForm, RegistrationForm, EditProfileForm
+from app.forms import LoginForm, RegistrationForm, EditProfileForm, PetForm, PossibleWalkForm
 from app.models import User
 
 from datetime import datetime
@@ -122,3 +122,65 @@ def edit_profile():
         form.about_me.data = current_user.about_me
     return render_template('edit_profile.html', title='Edit Profile',
                            form=form)
+
+
+@app.route('/new_pet', methods=['GET', 'POST'])
+@login_required
+def new_pet():
+    form = PetForm()
+    if form.validate_on_submit():
+        
+        # current_user.username = form.username.data
+        
+
+        # if form.image.data:
+        #     f = form.image.data
+        #     uploaded_filename = secure_filename(f.filename)
+        #     _, file_extension = os.path.splitext(uploaded_filename)    
+        #     filename = "{}{}".format(current_user.username, file_extension)
+
+        #     f.save(os.path.join(os.path.dirname(__file__),'static','avatar', filename))
+        #     current_user.avatar = "avatar/{}".format(filename)
+
+        # db.session.commit()
+        # flash('Your changes have been saved.')
+
+        return redirect(url_for('new_pet'))
+    # elif request.method == 'GET':
+    #     form.name.data = current_user.username
+    #     form.about_me.data = current_user.about_me
+    return render_template('new_pet.html', title='Cadastrar Pet',
+                           form=form)
+
+@app.route('/new_walk', methods=['GET', 'POST'])
+@login_required
+def new_walk():
+    form = PossibleWalkForm()
+    if form.validate_on_submit():
+        
+        # current_user.username = form.username.data
+        
+
+        # if form.image.data:
+        #     f = form.image.data
+        #     uploaded_filename = secure_filename(f.filename)
+        #     _, file_extension = os.path.splitext(uploaded_filename)    
+        #     filename = "{}{}".format(current_user.username, file_extension)
+
+        #     f.save(os.path.join(os.path.dirname(__file__),'static','avatar', filename))
+        #     current_user.avatar = "avatar/{}".format(filename)
+
+        # db.session.commit()
+        # flash('Your changes have been saved.')
+
+        return redirect(url_for('new_walk'))
+    # elif request.method == 'GET':
+    #     form.name.data = current_user.username
+    #     form.about_me.data = current_user.about_me
+    return render_template('new_walk.html', title='Cadastrar Passeio',
+                           form=form)
+
+
+# @app.route('/create_walk', methods=['GET', 'POST'])
+# @login_required
+
