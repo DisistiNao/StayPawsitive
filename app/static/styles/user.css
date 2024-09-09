@@ -133,7 +133,15 @@ a:visited {
 
 .list img {
     width: 27rem;
-    height: auto;
+    height: 27rem;
+    border-radius: 50%;
+    border: 1px solid black;
+
+}
+
+.list p{
+    margin-top: 4%;
+    margin-bottom: 4%;
 }
 
 
