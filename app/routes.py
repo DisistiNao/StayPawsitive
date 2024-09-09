@@ -161,7 +161,7 @@ def new_pet():
         formatted_phone = format_phone_number(current_user.phone)
         
         age = calculate_age(current_user.birthdate)
-        return render_template('user.html', user=current_user, age=age, phone=formatted_phone)
+        return redirect(url_for('user', username=current_user.username))
     return render_template('new_pet.html', title='Regiter Pet', form=form)
 
 @app.route('/new_walk', methods=['GET', 'POST'])
