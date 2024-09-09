@@ -44,26 +44,19 @@
         <div class="line"></div>
         <h1 style="font-weight: bold; font-size: 28px; margin-left: 40px;">Pets cadastrados</h1>
         <div class="pets">
-            
-            <div class="pets-list">
-
+            <div class="list">
                 {% for pet in pets %}
-                <div class="pet-cards">
-                    <div class="pet-image">
-                        <img src="{{url_for('static', filename=pet.photo)}}">
-                    </div>
-                    <div class="pet-info">
-                        <p>Nome: {{pet.name}} </p>
-                        <p>Raça: {{pet.breed}} </p>
-                        {% if pet.sex == "female" %}
-                        <p>Sexo: Fêmea </p>
-                        {% else %}
-                        <p>Sexo: Macho </p>
-                        {% endif %}
-                    </div>
+                <div>
+                    <img src="{{url_for('static', filename=pet.photo)}}">
+                    <p>Nome: {{pet.name}} </p>
+                    <p>Raça: {{pet.breed}} </p>
+                    {% if pet.sex == "female" %}
+                    <p>Sexo: Fêmea </p>
+                    {% else %}
+                    <p>Sexo: Macho </p>
+                    {% endif %}
                 </div>
                 {% endfor%}
-
             </div>
             <button onclick="redirect_new_pet()">Cadastrar um pet</button>
         </div>
