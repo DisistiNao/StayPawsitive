@@ -68,7 +68,7 @@ class Pet(db.Model):
         return "Pet name: {}\n owner:{}".format(self.name, self.username)
 
 class PossibleWalk(db.Model):
-    id: so.Mapped[int] = so.mapped_column(primary_key = True, index=True)
+    id: so.Mapped[int] = so.mapped_column(primary_key = True, autoincrement=True)
     max_pets: so.Mapped[int] = so.mapped_column()
     date: so.Mapped[datetime.date] = so.mapped_column(Date)
     start_hour: so.Mapped[time] = so.mapped_column(Time)
@@ -78,7 +78,7 @@ class PossibleWalk(db.Model):
         return "Possible Walk id: {}\n Possible date: {}, from {} to {}".format(self.id, self.date, self.startHour, self.endHour)
         
 class PossiblePetBoarding(db.Model):
-    id: so.Mapped[int] = so.mapped_column(primary_key = True, index=True)
+    id: so.Mapped[int] = so.mapped_column(primary_key = True, autoincrement=True)
     max_pets: so.Mapped[int] = so.mapped_column()
     start_date: so.Mapped[date] = so.mapped_column(Date)
     end_date: so.Mapped[date] = so.mapped_column(Date)

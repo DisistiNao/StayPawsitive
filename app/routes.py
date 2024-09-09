@@ -5,7 +5,10 @@ from flask import render_template, flash, redirect, url_for, request
 from flask_login import login_user, logout_user, current_user, login_required
 
 from werkzeug.utils import secure_filename
+
 import sqlalchemy as sa
+from sqlalchemy import create_engine
+from sqlalchemy.orm import sessionmaker
 
 from app import app, db, photos
 from app.forms import LoginForm, RegistrationForm, EditProfileForm, PetForm, PossibleWalkForm
@@ -168,6 +171,9 @@ def new_walk():
     form = PossibleWalkForm()
     if form.validate_on_submit():
         
+        Session = sessionmaker(bind=db)
+        session = Session()
+
         walk = PossibleWalk(
             max_pets = form.max_pets.data,
             date = form.date.data,
