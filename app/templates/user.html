@@ -1,99 +1,107 @@
 {% extends "base.html" %}
 
+
 {% block head %}
-    {{ super() }}
-    <link rel="stylesheet" href="{{url_for('static', filename='styles/user.css')}}">
+   {{ super() }}
+   <link rel="stylesheet" href="{{url_for('static', filename='styles/user.css')}}">
 {% endblock head %}
 
+
 {% block content %}
-    <div class="container">
-        <div class="title">
-            Meu perfil
-        </div>
-        <div class="infos">
-            <div class="profile-data">
-                <img src="{{url_for('static', filename='{}'.format(user.avatar))}}">
-                <div>
-                    <div>
-                        {{ user.username }}
-                        <br>
-                        {{ age }} anos
-                    </div>
-                    <div>
-                        Número para contato:
-                        <br>
-                        {{ phone }}
-                    </div>
-                </div>
-                {% if user == current_user %}
-                    <div>
-                        <a href="{{ url_for('edit_profile') }}" class="edit-profile">Editar perfil</a>
-                        <a href="#" class="delete-profile">Deletar perfil</a>
-                    </div>
-                {% endif %}
-                
-            </div>
-        </div>
-        {% if user.about_me %}
-            <div class="line"></div>
-            <div class="about-me">
-                <h1>Sobre mim</h1>
-                <p>{{ user.about_me }}</p>
-            </div>
-        {% endif %}
-        <div class="line"></div>
-        <h1 style="font-weight: bold; font-size: 28px; margin-left: 40px;">Pets cadastrados</h1>
-        <div class="pets">
+   <div class="container">
+       <div class="title">
+           Meu perfil
+       </div>
+       <div class="infos">
+           <div class="profile-data">
+               <img src="{{url_for('static', filename='{}'.format(user.avatar))}}">
+               <div>
+                   <div>
+                       {{ user.username }}
+                       <br>
+                       {{ age }} anos
+                   </div>
+                   <div>
+                       Número para contato:
+                       <br>
+                       {{ phone }}
+                   </div>
+               </div>
+               {% if user == current_user %}
+                   <div>
+                       <a href="{{ url_for('edit_profile') }}" class="edit-profile">Editar perfil</a>
+                       <a href="#" class="delete-profile">Deletar perfil</a>
+                   </div>
+               {% endif %}
+              
+           </div>
+       </div>
+       {% if user.about_me %}
+           <div class="line"></div>
+           <div class="about-me">
+               <h1>Sobre mim</h1>
+               <p>{{ user.about_me }}</p>
+           </div>
+       {% endif %}
+       
+       <div class="line"></div>
 
-            <div class="pets-list">
 
-                {% for pet in pets %}
-                <div class="pet-cards">
-                    <div class="pet-image">
-                        <img src="{{url_for('static', filename=pet.photo)}}">
-                    </div>
-                    <div class="pet-info">
-                        <p>Nome: {{pet.name}} </p>
-                        <p>Raça: {{pet.breed}} </p>
-                        {% if pet.sex == "female" %}
-                        <p>Sexo: Fêmea </p>
-                        {% else %}
-                        <p>Sexo: Macho </p>
-                        {% endif %}
-                    </div>
-                </div>
-                {% endfor%}
+       <h1 style="font-weight: bold; font-size: 28px; margin-left: 40px;">Pets cadastrados</h1>
+       <div class="pets">
+           <div class="list">
+               {% for pet in pets %}
+               <div>
+                   <img src="{{url_for('static', filename=pet.photo)}}">
+                   <p>Nome: {{pet.name}} </p>
+                   <p>Raça: {{pet.breed}} </p>
+                   {% if pet.sex == "female" %}
+                   <p>Sexo: Fêmea </p>
+                   {% else %}
+                   <p>Sexo: Macho </p>
+                   {% endif %}
+               </div>
+               {% endfor%}
+           </div>
+           <button onclick="redirect_new_pet()">Cadastrar um pet</button>
+       </div>
 
-            </div>
-            <button onclick="redirect_new_pet()">Cadastrar um pet</button>
-        </div>
-        <div class="line"></div>
-        <h1 style="font-weight: bold; font-size: 28px; margin-left: 40px;">Serviços cadastrados</h1>
-        <div class="services">
-            <div class="list">
-                <div>
-                    <img src="{{url_for('static', filename='images/hospedagem.png')}}">
-                    <p>Tipo: Hospedagem</p>
-                    <p>Dia: 06/09/2024</p>
-                    <p>Endereço: Rua Augusta, 302  - SP/SP</p>
-                </div>
-                <div>
-                    <img src="{{url_for('static', filename='images/passeio.png')}}">
-                    <p>Tipo: Passeio</p>
-                    <p>Dias: 15/03/2025 - 17/03/2024</p>
-                    <p>Período: 13:00 - 19:00</p>
-                    <p>Número máximo de pets: 2</p>
-                </div>
-            </div>
-            <button onclick="redirect_new_walk()">Cadastrar um serviço</button>
-        </div>
-    </div>
-    <script>
-        function redirect_new_pet() {
-            window.location.href = "{{ url_for('new_pet') }}"
-        }
-        function redirect_new_walk(){
-            window.location.href = "{{ url_for('new_walk') }}"
-        }
-    </script>
+
+
+       <div class="line"></div>
+
+
+
+       <h1 style="font-weight: bold; font-size: 28px; margin-left: 40px;">Serviços cadastrados</h1>
+       <div class="pets">
+           <div class="list">
+               {% for walk in possible_walks %}
+               <div>
+                   <img src="{{url_for('static', filename='images/passeio.png')}}">
+                   <p>Dia: {{walk.date}} </p>
+                   <p>Horário: {{walk.start_hour}} - {{walk.end_hour}} </p>
+                   <p>Máximo de pets: {{walk.max_pets}} </p>
+               </div>
+               {% endfor%}
+           </div>
+           <button onclick="redirect_new_walk()">Cadastrar um serviço</button>
+       </div>
+   </div>
+
+
+
+
+   <script>
+       function redirect_new_pet() {
+           window.location.href = "{{ url_for('new_pet') }}"
+       }
+
+
+       function redirect_new_walk(){
+           window.location.href = "{{ url_for('new_walk') }}"
+
+
+       }
+   </script>
 {% endblock %}
+
