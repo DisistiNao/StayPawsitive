@@ -9,7 +9,7 @@ import sqlalchemy as sa
 
 from app import app, db, photos
 from app.forms import LoginForm, RegistrationForm, EditProfileForm, PetForm, PossibleWalkForm
-from app.models import User, Pet
+from app.models import User, Pet, PossibleWalk
 
 from datetime import datetime
 
@@ -96,7 +96,8 @@ def user(username):
     
     pets = db.session.query(Pet).join(User).filter(User.username == current_user.username).all()
     
-    return render_template('user.html', user=user, age=age, phone=formatted_phone, pets=pets)
+    possible_walks = db.session.query(PossibleWalk).join(User).filter(User.username == current_user.username).all()
+    return render_template('user.html', user=user, age=age, phone=formatted_phone, pets=pets, possible_walks= possible_walks)
 
 @app.route('/edit_profile', methods=['GET', 'POST'])
 @login_required
@@ -157,10 +158,7 @@ def new_pet():
         db.session.add(pet)
         db.session.commit()
         flash('Seu pet foia adicionado.')
-
-        formatted_phone = format_phone_number(current_user.phone)
         
-        age = calculate_age(current_user.birthdate)
         return redirect(url_for('user', username=current_user.username))
     return render_template('new_pet.html', title='Regiter Pet', form=form)
 
@@ -170,26 +168,18 @@ def new_walk():
     form = PossibleWalkForm()
     if form.validate_on_submit():
         
-        # Pet = 
-        # current_user.username = form.username.data
-        
+        walk = PossibleWalk(
+            max_pets = form.max_pets.data,
+            date = form.date.data,
+            start_hour = form.start_hour.data,
+            end_hour = form.end_hour.data,
+            username = current_user.username
+        )
 
-        # if form.image.data:
-        #     f = form.image.data
-        #     uploaded_filename = secure_filename(f.filename)
-        #     _, file_extension = os.path.splitext(uploaded_filename)    
-        #     filename = "{}{}".format(current_user.username, file_extension)
-
-        #     f.save(os.path.join(os.path.dirname(__file__),'static','avatar', filename))
-        #     current_user.avatar = "avatar/{}".format(filename)
-
-        # db.session.commit()
-        # flash('Your changes have been saved.')
-
-        return redirect(url_for('new_walk'))
-    # elif request.method == 'GET':
-    #     form.name.data = current_user.username
-    #     form.about_me.data = current_user.about_me
+        db.session.add(walk)
+        db.session.commit()
+        flash('Caminhada criada!.')
+        return redirect(url_for('user', username=current_user.username))
     return render_template('new_walk.html', title='Cadastrar Passeio',
                            form=form)
 
