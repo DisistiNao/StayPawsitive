@@ -87,13 +87,6 @@ a:visited {
 
 }
 
-.pets-list{
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: space-around;
-    margin: 20px;
-}
 
 .about-me,
 .services {
@@ -124,17 +117,6 @@ a:visited {
     margin-top: 1rem;
 }
 
-.pet-cards{
-    width: 33%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    border-radius: 10px;
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-    margin-bottom: 20px;
-
-}
 
 .about-me > p {
     font-size: 32px;
@@ -143,6 +125,7 @@ a:visited {
 
 .list {
     display: flex;
+    flex-wrap: wrap;
     justify-content: space-around;
     text-align: center;
     font-size: 20px;
@@ -153,10 +136,27 @@ a:visited {
     height: auto;
 }
 
+
+.line {
+    border-top: 2px solid #734D54;
+    margin: 4% 4%;
+}
+
+
+
+
+
+
+
+
+
+
+
+/* 
 .pet-cards img {
     border-radius: 50%;
     width: 27rem;
-    height: 25rem;
+    height: auto;
     border: 1px solid black;
 }
 
@@ -165,7 +165,22 @@ a:visited {
     font-weight: 400;
 }
 
-.line {
-    border-top: 2px solid #734D54;
-    margin: 4% 4%;
+.pet-cards{
+        width: 33%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        border-radius: 10px;
+        box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+        margin-bottom: 20px;
+    
 }
+
+.pets-list{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    margin: 20px;
+} */
