@@ -25,13 +25,15 @@ html {
     border: 1px solid #F2D5D8;
     border-radius: 24px;
     padding-bottom: 4%;
+    border: 0.5px solid black;
+
 }
 
 .title {
     background-color: #F2D5D8;
     padding: 1% 2%;
     border-radius: 24px;
-
+    border: 0.5px solid black;
     font-size: 35px;
     font-weight: 700;
 }
