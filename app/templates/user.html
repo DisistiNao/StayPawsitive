@@ -55,7 +55,11 @@
                     <div class="pet-info">
                         <p>Nome: {{pet.name}} </p>
                         <p>Raça: {{pet.breed}} </p>
-                        <p>Sexo: {{pet.sex}} </p>
+                        {% if pet.sex == "female" %}
+                        <p>Sexo: Fêmea </p>
+                        {% else %}
+                        <p>Sexo: Macho </p>
+                        {% endif %}
                     </div>
                 </div>
                 {% endfor%}
