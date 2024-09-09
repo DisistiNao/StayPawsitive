@@ -2,7 +2,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat+Alternates:wght@400;700&display=swap');
 /*importa a fonte irish grober*/
 @import url('https://fonts.googleapis.com/css2?family=Irish+Grover&display=swap');
-
 body {
     font-family: 'Montserrat Alternates', sans-serif;
     font-style: normal;
@@ -10,7 +9,6 @@ body {
     padding: 0;
     min-height: 1000px;
 }
-
 html {
     margin: 0;
     padding: 0;
@@ -18,39 +16,42 @@ html {
 }
 
 .container {
+    width: 85%;
     background-color: #F2EBEC;
-    margin: 4% 4%;
+    margin-left: 7%;
+    margin-top: 5%;
     border: 1px solid #F2D5D8;
     border-radius: 24px;
-
     padding-bottom: 4%;
+    border: 0.5px solid black;
+
 }
 
 .title {
     background-color: #F2D5D8;
     padding: 1% 2%;
     border-radius: 24px;
-
-    font-size: 48px;
+    border: 0.5px solid black;
+    font-size: 35px;
     font-weight: 700;
 }
 
 .infos {
     padding: 2% 4%;
 }
-
 .profile-data {
     display: flex;
     justify-content: space-between;
 
-    font-size: 48px;
+    font-size: 30px;
 
     padding-top: 2%;
 }
 
 .profile-data > img {
     border-radius: 50%;
-    max-width: 30%;
+    border: 1px solid black;
+    max-width: 25%;
     height: auto;
 }
 
@@ -60,7 +61,6 @@ html {
     justify-content: space-between;
     text-align: center;
 }
-
 a:link {
     text-decoration: none;
 }
@@ -70,39 +70,49 @@ a:visited {
 }
 
 .profile-data > div > a {
-    font-size: 40px;
+    font-size: 23px;
     font-weight: 400;
 }
 
 .edit-profile {
     color: #3D68FE;
 }
-
 .delete-profile {
     color: #FF0000;
 }
 
-.pets,
+.pets{
+    display: flex;
+    flex-direction: column;
+
+}
+
+.pets-list{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    margin: 20px;
+}
+
 .about-me,
 .services {
     padding: 0% 8%;
-
     display: flex;
     flex-direction: column;
 }
 
-.pets > h1,
+.pet-info > h1,
 .about-me > h1,
 .services > h1 {
     font-size: 48px;
     font-weight: 700;
 }
-
 .pets > button,
 .services > button {
     background-color: #F2D5D8;
 
-    font-size: 2vw;
+    font-size: 25px;
     font-weight: 400;
 
     padding: 1%;
@@ -110,53 +120,48 @@ a:visited {
     border: 1px solid black;
 
     align-self: flex-end;
+    margin-right: 5rem;
     margin-top: 1rem;
+}
+
+.pet-cards{
+    width: 33%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    border-radius: 10px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+
 }
 
 .about-me > p {
     font-size: 32px;
 }
 
+
 .list {
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
     text-align: center;
-    flex-wrap: wrap;
-    gap: 20px;
+    font-size: 20px;
 }
 
-list > div {
-    flex: 1 1 30%;
-    max-width: 100%;
-    box-sizing: border-box;
-}
-
-.list > div > img {
-    border-radius: 50%;
-    width: 100%;
+.list img {
+    width: 27rem;
     height: auto;
-    max-width: 250px;
 }
 
-@media (max-width: 768px) {
-    .list > div {
-        flex: 1 1 45%;
-    }
+.pet-cards img {
+    border-radius: 50%;
+    width: 27rem;
+    height: 25rem;
+    border: 1px solid black;
 }
 
-@media (max-width: 480px) {
-    .list {
-        flex-direction: column;
-        align-items: center;
-    }
-
-    .list > div {
-        flex: 1 1 100%;
-    }
-}
-
-.list > div > p {
-    font-size: 2vw;
+.pet-info  p {
+    font-size: 20px;
     font-weight: 400;
 }
 

@@ -44,19 +44,26 @@
         <div class="line"></div>
         <h1 style="font-weight: bold; font-size: 28px; margin-left: 40px;">Pets cadastrados</h1>
         <div class="pets">
-            <div class="list">
+
+            <div class="pets-list">
+
                 {% for pet in pets %}
-                <div>
-                    <img src="{{url_for('static', filename=pet.photo)}}">
-                    <p>Nome: {{pet.name}} </p>
-                    <p>Raça: {{pet.breed}} </p>
-                    {% if pet.sex == "female" %}
-                    <p>Sexo: Fêmea </p>
-                    {% else %}
-                    <p>Sexo: Macho </p>
-                    {% endif %}
+                <div class="pet-cards">
+                    <div class="pet-image">
+                        <img src="{{url_for('static', filename=pet.photo)}}">
+                    </div>
+                    <div class="pet-info">
+                        <p>Nome: {{pet.name}} </p>
+                        <p>Raça: {{pet.breed}} </p>
+                        {% if pet.sex == "female" %}
+                        <p>Sexo: Fêmea </p>
+                        {% else %}
+                        <p>Sexo: Macho </p>
+                        {% endif %}
+                    </div>
                 </div>
                 {% endfor%}
+
             </div>
             <button onclick="redirect_new_pet()">Cadastrar um pet</button>
         </div>
@@ -81,16 +88,12 @@
             <button onclick="redirect_new_walk()">Cadastrar um serviço</button>
         </div>
     </div>
-
-
     <script>
         function redirect_new_pet() {
             window.location.href = "{{ url_for('new_pet') }}"
         }
-
         function redirect_new_walk(){
             window.location.href = "{{ url_for('new_walk') }}"
-
         }
     </script>
 {% endblock %}
