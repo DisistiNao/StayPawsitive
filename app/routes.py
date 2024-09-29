@@ -186,10 +186,16 @@ def new_walk():
         db.session.commit()
         flash('Caminhada criada!.')
         return redirect(url_for('user', username=current_user.username))
+    
     return render_template('new_walk.html', title='Cadastrar Passeio',
                            form=form)
 
 
-# @app.route('/create_walk', methods=['GET', 'POST'])
-# @login_required
 
+@app.route('/services', methods=['GET', 'POST'])
+@login_required
+def services():
+
+    possible_walks = db.session.query(PossibleWalk).filter(PossibleWalk.username != current_user.username).all()
+
+    return render_template('services.html', title='Ver serviços disponíveis', possible_walks=possible_walks)

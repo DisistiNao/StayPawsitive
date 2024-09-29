@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block head %}
+    {{ super() }}
+    <link rel="stylesheet" href="{{url_for('static', filename='')}}">
+{% endblock head %}
+
+
+{% block content %}
+    <h1 style="font-weight: bold; font-size: 28px; margin-left: 40px;">Serviços cadastrados</h1>
+    <div class="pets">
+        <div class="list">
+            {% for walk in possible_walks %}
+            <div>
+                <img src="{{url_for('static', filename='images/passeio.png')}}">
+                <p>Dia: {{walk.date}} </p>
+                <p>Horário: {{walk.start_hour}} - {{walk.end_hour}} </p>
+                <p>Máximo de pets: {{walk.max_pets}} </p>
+                <p>Fornecedor: {{walk.username}}
+            </div>
+            {% endfor%}
+        </div>
+        <button onclick="redirect_new_walk()">Cadastrar um serviço</button
+
+{% endblock %}
