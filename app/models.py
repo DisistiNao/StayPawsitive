@@ -102,10 +102,10 @@ class Service(db.Model):
             service_type.join("Pet Walking")
         return "Service id: {}\n Service type: {}".format(self.id, service_type)
 
-class Requests(db.Model):
+class RequestedService(db.Model):
     # username: so.Mapped[str] = so.mapped_column(sa.ForeignKey(User.username), index=True)
     username: so.Mapped[str] = so.mapped_column(sa.ForeignKey(User.username), index=True, primary_key=True)
-    service_id: so.Mapped[int] = so.mapped_column(sa.ForeignKey(Service.id), primary_key=True)
+    id_service: so.Mapped[int] = so.mapped_column(sa.ForeignKey(Service.id), primary_key=True)
     status: so.Mapped[str] = so.mapped_column(sa.String(20))
     
     

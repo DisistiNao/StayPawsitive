@@ -4,7 +4,7 @@ from flask_wtf.file import FileField, FileAllowed
 
 from flask_login import current_user
 
-from wtforms import SelectField, DateField, IntegerField, StringField, PasswordField, BooleanField, SubmitField, DateField, TimeField
+from wtforms import SelectField, DateField, IntegerField, StringField, PasswordField, BooleanField, SubmitField, DateField, TimeField, HiddenField
 from wtforms.validators import ValidationError, DataRequired, Email, EqualTo, Length, Regexp, NumberRange
 from wtforms import TextAreaField
 from wtforms.validators import Length
@@ -147,9 +147,11 @@ class PetForm(FlaskForm):
             raise ValidationError('Já existe um pet com esse nome registrado para esse usuário.')
 
 class AcceptForm(FlaskForm):
+    service_id = HiddenField()
     submit = SubmitField('Aceitar')
 
 class DeclineForm(FlaskForm):
+    service_id = HiddenField()
     submit = SubmitField('Recusar')
 
 class RequestForm(FlaskForm):

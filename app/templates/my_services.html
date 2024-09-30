@@ -7,28 +7,21 @@
 
 
 {% block content %}
-    <h1 style="font-weight: bold; font-size: 28px; margin-left: 40px;">Serviços cadastrados</h1>
-    <div class="pets">
-        <div class="list">
-            {% for walk in possible_walks %}
-            <div>
-                <img src="{{url_for('static', filename='images/passeio.png')}}">
-                <p>Dia: {{walk.date}} </p>
-                <p>Horário: {{walk.start_hour}} - {{walk.end_hour}} </p>
-                <p>Máximo de pets: {{walk.max_pets}} </p>
-                <p>Fornecedor: {{walk.username}}
+    {% for service in my_services %}
+        <div>
+            <p>Service ID: {{ service.id }} - Type: {{ service.service_type }} - Status: {{ service.status }}</p>
 
-                <button onclick="redirectToService('{{ walk.id }}')">Ver serviço</button>
-            </div>
-            {% endfor%}
+            <form action="" method="post">
+                {{ accept_form.hidden_tag() }}
+                {{ accept_form.service_id(value=service.id) }}
+                {{ accept_form.submit() }}
+            </form>
+
+            <form action="" method="post">
+                {{ decline_form.hidden_tag() }}
+                {{ decline_form.service_id(value=service.id) }}
+                {{ decline_form.submit() }}
+            </form>
         </div>
-    </div>
-
-    <script>
-        // Função de redirecionamento para a rota /services/<id_service>
-        function redirectToService(id_service) {
-            window.location.href = `/services/${id_service}`;
-        }
-    </script>
-
+    {% endfor %}
 {% endblock %}

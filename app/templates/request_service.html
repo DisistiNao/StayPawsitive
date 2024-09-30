@@ -10,6 +10,7 @@
     <h1 style="font-weight: bold; font-size: 28px; margin-left: 40px;">Serviços cadastrados</h1>
     <div class="pets">
         <div class="list">
+            {% if walk %}
             <div>
                 <img src="{{url_for('static', filename='images/passeio.png')}}">
                 <p>Dia: {{walk.date}} </p>
@@ -30,8 +31,8 @@
                 </form>
                 
             </div>
+            {% endif %}
         </div>
-
     </div>
     <script>
         // Função de redirecionamento para a rota /services/<id_service>

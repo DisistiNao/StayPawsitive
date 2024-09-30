@@ -1,7 +1,7 @@
 import os
 from urllib.parse import urlsplit
 
-from flask import render_template, flash, redirect, url_for, request
+from flask import render_template, flash, redirect, url_for, request, abort
 from flask_login import login_user, logout_user, current_user, login_required
 
 from werkzeug.utils import secure_filename
@@ -11,8 +11,8 @@ from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 
 from app import app, db, photos
-from app.forms import LoginForm, RegistrationForm, EditProfileForm, PetForm, PossibleWalkForm, RequestForm
-from app.models import User, Pet, PossibleWalk
+from app.forms import LoginForm, RegistrationForm, EditProfileForm, PetForm, PossibleWalkForm, RequestForm, AcceptForm, DeclineForm
+from app.models import User, Pet, PossibleWalk, PossiblePetBoarding, RequestedService, Service
 
 from datetime import datetime
 
@@ -214,7 +214,74 @@ def request_services(type, id_service):
         form.pet.choices = [(pet.name, pet.name) for pet in pets]
 
         walk = db.session.query(PossibleWalk).filter(PossibleWalk.id == id_service).all()
+
+
+        if form.validate_on_submit():
+            requested_service = RequestedService(
+                username=current_user.username,
+                id_service=id_service,
+                status='pending'
+            )
+
+            user = current_user
+            user.credits -= 1
+
+            db.session.add(requested_service)
+            db.session.commit()
+
+            return redirect(url_for('my_services'))
+        return render_template('request_service.html', title='Solicitar Serviço', walk=walk, boarding=None,form=form)
+    
+    elif type == 'boarding':
+        pets = db.session.query(Pet).join(User).filter(User.username == current_user.username).all()
+        form = RequestForm(pets);
+        
+        form.pet.choices = [(pet.name, pet.name) for pet in pets]
+
+        boarding = db.session.query(PossiblePetBoarding).filter(PossiblePetBoarding.id == id_service).all()
+
+        return render_template('request_service.html', title='Solicitar Serviço', walk = None, boarding= boarding, form=form)
+    
+    abort(404)
+
+@app.route('/my_services')
+def my_services():
+
+    accept_form = AcceptForm()
+    decline_form = DeclineForm()
+
+    my_requested_services = db.session.query(RequestedService).filter(User.username == current_user.username).all()
+
+    my_services = (
+        db.session.query(RequestedService)
+        .join(Service, Service.id == RequestedService.id_service)
+        .filter(Service.username == current_user.username)
+        .filter(RequestedService.status == 'pending')
+        .all()
+    )
+    
+    if accept_form.validate_on_submit():
+        service_id = accept_form.service_id.data
+        requested_service = RequestedService.query.filter_by(id_service=service_id).first()
+
+        user = User.query.filter_by(username=requested_service.username).first()
+        user.credits -= 1
+        requested_service.status = 'accepted'
+        db.session.commit()
+        
+        return redirect(url_for('my_services'))
         
 
-        return render_template('request_service.html', title='Solicitar Serviço', walk=walk, form=form)
+    elif decline_form.validate_on_submit():
+        service_id = accept_form.service_id.data
+        requested_service = RequestedService.query.filter_by(id_service=service_id).first()
 
+        user = User.query.filter_by(username=requested_service.username).first()
+        user.credits += 1
+        requested_service.status = 'denied'
+        db.session.commit()
+
+        return redirect(url_for('my_services'))
+
+
+    return render_template('my_services.html', title='Meus Serviços', my_requested_services=my_requested_services, my_services=my_services)
