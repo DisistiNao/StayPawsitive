@@ -15,7 +15,7 @@ class User(UserMixin, db.Model):
     email: so.Mapped[str] = so.mapped_column(sa.String(120), index=True,
                                              unique=True)
     password_hash: so.Mapped[Optional[str]] = so.mapped_column(sa.String(256))
-
+    credits: so.Mapped[int] = so.mapped_column()
     name: so.Mapped[str] = so.mapped_column(sa.String(64), index=True, unique=False)
     phone: so.Mapped[str] = so.mapped_column(sa.String(15), index=True, unique=False)
     birthdate: so.Mapped[datetime] = so.mapped_column(
@@ -92,7 +92,7 @@ class Service(db.Model):
     username: so.Mapped[str] = so.mapped_column(sa.ForeignKey(User.username), index=True)
     pet_name: so.Mapped[str] = so.mapped_column(sa.ForeignKey(Pet.name))
     boarding_id: so.Mapped[str] = so.mapped_column(sa.ForeignKey(PossiblePetBoarding.id), nullable=True)
-    walk_id: so.Mapped[str] = so.mapped_column(sa.ForeignKey(PossibleWalk.id),nullable=True)
+    walk_id: so.Mapped[int] = so.mapped_column(sa.ForeignKey(PossibleWalk.id),nullable=True)
 
     def __repr__(self):
         service_type = ""
@@ -101,3 +101,11 @@ class Service(db.Model):
         else:
             service_type.join("Pet Walking")
         return "Service id: {}\n Service type: {}".format(self.id, service_type)
+
+class Requests(db.Model):
+    # username: so.Mapped[str] = so.mapped_column(sa.ForeignKey(User.username), index=True)
+    username: so.Mapped[str] = so.mapped_column(sa.ForeignKey(User.username), index=True, primary_key=True)
+    service_id: so.Mapped[int] = so.mapped_column(sa.ForeignKey(Service.id), primary_key=True)
+    status: so.Mapped[str] = so.mapped_column(sa.String(20))
+    
+    

@@ -137,7 +137,7 @@ class PetForm(FlaskForm):
             ('male', 'Macho'),
             ('female', 'Fêmea')
         ], validators=[DataRequired()])
-    friendly = BooleanField('É amigável?', validators=[DataRequired()])
+    friendly = BooleanField('É amigável?', validators=[])
     submit = SubmitField('Submit')
 
     def validate_name(self, name):
@@ -146,3 +146,17 @@ class PetForm(FlaskForm):
         if existing_pet:
             raise ValidationError('Já existe um pet com esse nome registrado para esse usuário.')
 
+class AcceptForm(FlaskForm):
+    submit = SubmitField('Aceitar')
+
+class DeclineForm(FlaskForm):
+    submit = SubmitField('Recusar')
+
+class RequestForm(FlaskForm):
+    pet = SelectField('Para qual pet você vai solicitar o serviço',choices=[], validators=[DataRequired()])
+    submit = SubmitField('Solicitar Serviço')
+
+    def __init__(self, pets=None):
+        super().__init__()  # calls the base initialisation and then...
+        if pets: 
+            self.pet.choices = [(pet.name, pet.name) for pet in pets]

@@ -11,7 +11,7 @@ from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 
 from app import app, db, photos
-from app.forms import LoginForm, RegistrationForm, EditProfileForm, PetForm, PossibleWalkForm
+from app.forms import LoginForm, RegistrationForm, EditProfileForm, PetForm, PossibleWalkForm, RequestForm
 from app.models import User, Pet, PossibleWalk
 
 from datetime import datetime
@@ -56,6 +56,7 @@ def register():
     if form.validate_on_submit():
         user = User(
             username=form.username.data,
+            credits= 5,
             name=form.name.data,
             email=form.email.data,
             phone=form.phone.data,
@@ -192,10 +193,28 @@ def new_walk():
 
 
 
-@app.route('/services', methods=['GET', 'POST'])
+@app.route('/services/', methods=['GET', 'POST'])
 @login_required
 def services():
 
     possible_walks = db.session.query(PossibleWalk).filter(PossibleWalk.username != current_user.username).all()
 
     return render_template('services.html', title='Ver serviços disponíveis', possible_walks=possible_walks)
+
+
+@app.route('/request_services/<type>/<id_service>', methods=['GET', 'POST'])
+@login_required
+def request_services(type, id_service):
+
+    if(type == 'walk'):
+        pets = db.session.query(Pet).join(User).filter(User.username == current_user.username).all()
+        
+        form = RequestForm(pets);
+        
+        form.pet.choices = [(pet.name, pet.name) for pet in pets]
+
+        walk = db.session.query(PossibleWalk).filter(PossibleWalk.id == id_service).all()
+        
+
+        return render_template('request_service.html', title='Solicitar Serviço', walk=walk, form=form)
+

@@ -2,15 +2,12 @@
 
 {% block head %}
     {{ super() }}
-    <link rel="stylesheet" href="{{url_for('static', filename='styles/user.css')}}">
+    <link rel="stylesheet" href="{{url_for('static', filename='')}}">
 {% endblock head %}
 
 
 {% block content %}
-<div class="container">
-    <div class="title">
-        Serviços Disponíveis
-    </div>
+    <h1 style="font-weight: bold; font-size: 28px; margin-left: 40px;">Serviços cadastrados</h1>
     <div class="pets">
         <div class="list">
             {% for walk in possible_walks %}
@@ -20,17 +17,18 @@
                 <p>Horário: {{walk.start_hour}} - {{walk.end_hour}} </p>
                 <p>Máximo de pets: {{walk.max_pets}} </p>
                 <p>Fornecedor: {{walk.username}}
-                <button onclick="redirectToWalk('{{ walk.id }}')">Ver serviço</button>
 
+                <button onclick="redirectToService('{{ walk.id }}')">Ver serviço</button>
             </div>
             {% endfor%}
         </div>
-
     </div>
+
     <script>
         // Função de redirecionamento para a rota /services/<id_service>
-        function redirectToWalk(id) {
-            window.location.href = `/request_services/walk/${id}`
+        function redirectToService(id_service) {
+            window.location.href = `/services/${id_service}`;
         }
     </script>
+
 {% endblock %}
