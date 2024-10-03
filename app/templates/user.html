@@ -14,7 +14,13 @@
        </div>
        <div class="infos">
            <div class="profile-data">
-               <img src="{{url_for('static', filename='{}'.format(user.avatar))}}">
+                <div class="profile-photo">
+                    <img src="{{url_for('static', filename='{}'.format(user.avatar))}}">
+                    <div class="credits">
+                        <img src="{{url_for('static', filename='images/coin.png')}}">
+                        <p>Créditos: {{ user.credits }}</p>
+                    </div>
+                </div>
                <div>
                    <div>
                        {{ user.username }}
