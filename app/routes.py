@@ -56,7 +56,7 @@ def register():
     if form.validate_on_submit():
         user = User(
             username=form.username.data,
-            credits= 5,
+            credits= 1000,
             name=form.name.data,
             email=form.email.data,
             phone=form.phone.data,
@@ -209,14 +209,13 @@ def request_services(type, id_service):
     if(type == 'walk'):
         pets = db.session.query(Pet).join(User).filter(User.username == current_user.username).all()
         
-        form = RequestForm(pets);
+        form = RequestForm(pets=pets);
         
-        form.pet.choices = [(pet.name, pet.name) for pet in pets]
-
         walk = db.session.query(PossibleWalk).filter(PossibleWalk.id == id_service).all()
 
 
         if form.validate_on_submit():
+            print("REQUEST VÁLIDO")
             requested_service = RequestedService(
                 username=current_user.username,
                 id_service=id_service,
@@ -230,6 +229,10 @@ def request_services(type, id_service):
             db.session.commit()
 
             return redirect(url_for('my_services'))
+        else:
+            print("UAIIIIII\n")
+            print(form.errors)
+
         return render_template('request_service.html', title='Solicitar Serviço', walk=walk, boarding=None,form=form)
     
     elif type == 'boarding':

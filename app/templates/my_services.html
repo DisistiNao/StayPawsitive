@@ -31,7 +31,9 @@
     {% endfor %}
 
     {% for service in my_requested_services %}
-        <div>dfasdfa</div>
+        <div>
+            <p>Service ID: {{ service.id_service }} - Status: {{ service.status }} - Fornecedor: {{service.username}}</p>    
+        </div
     {% endfor %}
 </div>
 {% endblock %}
