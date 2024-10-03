@@ -48,11 +48,34 @@ html {
     padding-top: 2%;
 }
 
-.profile-data > img {
+.profile-photo {
+    display: flex;
+    align-items: center;
+    width: 30%;
+    height: auto;
+    justify-content: space-between;
+
+    font-size: 30px;
+
+    padding-top: 2%;
+}
+
+.profile-photo > img {
     border-radius: 50%;
     border: 1px solid black;
-    max-width: 25%;
+    max-width: 70%;
     height: auto;
+}
+
+.credits {
+    display: flex;
+    flex-direction: row;
+}
+
+.credits img{
+    width: 20%;
+    height: 45%;
+    margin-top: 2.5rem;
 }
 
 .profile-data > div {
