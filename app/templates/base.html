@@ -28,6 +28,7 @@
                     <a href="{{ url_for('login') }}">Login</a>
                     {% else %}
                     <a href="{{ url_for('logout') }}">Logout</a>
+                    <a href="{{ url_for('my_services') }}">Meus Serviços</a>
                     <a href="{{ url_for('user', username=current_user.username) }}">Profile</a>
                     <a href ="{{url_for('services')}}"">Serviços Disponíveis</a>
                     {% endif %}

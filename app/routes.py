@@ -228,7 +228,7 @@ def request_services(type, id_service):
             db.session.add(requested_service)
             db.session.commit()
 
-            return redirect(url_for('my_services'))
+            return redirect(url_for('services'))
         else:
             print("UAIIIIII\n")
             print(form.errors)
@@ -256,12 +256,13 @@ def my_services():
     my_requested_services = db.session.query(RequestedService).filter(User.username == current_user.username).all()
 
     my_services = (
-        db.session.query(RequestedService)
-        .join(Service, Service.id == RequestedService.id_service)
-        .filter(Service.username == current_user.username)
-        .filter(RequestedService.status == 'pending')
-        .all()
+        []
     )
+        # db.session.query(RequestedService)
+        # .join(Service, Service.id == RequestedService.id_service)
+        # .filter(Service.username == current_user.username)
+        # .filter(RequestedService.status == 'pending')
+        # .all()
     
     if accept_form.validate_on_submit():
         service_id = accept_form.service_id.data
