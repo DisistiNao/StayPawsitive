@@ -2,26 +2,36 @@
 
 {% block head %}
     {{ super() }}
-    <link rel="stylesheet" href="{{url_for('static', filename='')}}">
+    <link rel="stylesheet" href="{{url_for('static', filename='styles/user.css')}}">
 {% endblock head %}
 
 
 {% block content %}
+<div class="container">
+    <div class="title">
+        Meus Serviços
+    </div>
+
     {% for service in my_services %}
         <div>
             <p>Service ID: {{ service.id }} - Type: {{ service.service_type }} - Status: {{ service.status }}</p>
-
+    
             <form action="" method="post">
                 {{ accept_form.hidden_tag() }}
                 {{ accept_form.service_id(value=service.id) }}
                 {{ accept_form.submit() }}
             </form>
-
+    
             <form action="" method="post">
                 {{ decline_form.hidden_tag() }}
                 {{ decline_form.service_id(value=service.id) }}
                 {{ decline_form.submit() }}
             </form>
-        </div>
+        </div>    
     {% endfor %}
+
+    {% for service in my_requested_services %}
+        <div>dfasdfa</div>
+    {% endfor %}
+</div>
 {% endblock %}

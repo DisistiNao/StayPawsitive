@@ -2,12 +2,15 @@
 
 {% block head %}
     {{ super() }}
-    <link rel="stylesheet" href="{{url_for('static', filename='')}}">
+    <link rel="stylesheet" href="{{url_for('static', filename='styles/user.css')}}">
 {% endblock head %}
 
 
 {% block content %}
-    <h1 style="font-weight: bold; font-size: 28px; margin-left: 40px;">Serviços cadastrados</h1>
+<div class="container">
+    <div class="title">
+        Serviços cadastrados
+    </div>    
     <div class="pets">
         <div class="list">
             {% if walk %}
@@ -40,5 +43,6 @@
             window.location.href = `/request_services/walk/${id}`
         }
     </script>
+</div>    
 {% endblock %}
 
